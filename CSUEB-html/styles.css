@@ -506,21 +506,21 @@ section.bg-black + section.bg-black {
 
 section.bg-black.key-feature-sec + section.bg-black.key-feature-sec,
 section.bg-black + .bg-black.key-feature-sec {
-  padding-top: 6rem;
+  padding-top: 4rem;
 }
 @media (max-width: 767.98px) {
   section.bg-black.key-feature-sec + section.bg-black.key-feature-sec,
   section.bg-black + .bg-black.key-feature-sec {
-    padding-top: 4.5rem;
+    padding-top: 2.5rem;
   }
 }
 
 section.bg-white.section-with-padding + section.bg-white {
-  padding-top: 6rem;
+  padding-top: 4rem;
 }
 @media (max-width: 767.98px) {
   section.bg-white.section-with-padding + section.bg-white {
-    padding-top: 4.5rem;
+    padding-top: 2.5rem;
   }
 }
 
@@ -637,11 +637,11 @@ section.bg-white.section-with-padding + section.bg-white {
 }
 
 .card-gaping {
-  padding-top: 6rem;
+  padding-top: 4rem;
 }
 @media (max-width: 767.98px) {
   .card-gaping {
-    padding-top: 4.5rem;
+    padding-top: 2.5rem;
   }
 }
 
@@ -1097,11 +1097,11 @@ section.bg-white.section-with-padding + section.bg-white {
 }
 
 .img-text-full-width-sec.bg-white:has(.main-img-slider) + .img-text-full-width-sec.bg-white:has(.main-img-slider) {
-  margin-top: 6rem;
+  margin-top: 4rem;
 }
 @media (max-width: 767.98px) {
   .img-text-full-width-sec.bg-white:has(.main-img-slider) + .img-text-full-width-sec.bg-white:has(.main-img-slider) {
-    margin-top: 4.5rem;
+    margin-top: 2.5rem;
   }
 }
 
@@ -1298,13 +1298,6 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card::after {
   html[hc=a4] .flip-tiles-gallery-grid .gallery-item:nth-child(3n+1) a:hover .overlay {
     background: linear-gradient(0deg, var(--black-40, rgba(0, 0, 0, 0.2)) 0%, var(--black-40, rgba(0, 0, 0, 0.2)) 100%), var(--purple-80, rgba(122, 35, 106, 0.1)) !important;
   }
-}
-html[hc=a2] .card-color-hover::after, .flip-tiles-gallery-grid .gallery-item html[hc=a2] a::after,
-html[hc=a2] .flip-tiles-gallery-grid .gallery-item a::after,
-html[hc=a4] .card-color-hover::after,
-.flip-tiles-gallery-grid .gallery-item html[hc=a4] a::after,
-html[hc=a4] .flip-tiles-gallery-grid .gallery-item a::after {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.3) 54.29%) !important;
 }
 html[hc=a2] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .button-grp a *,
 html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .button-grp a * {
@@ -4069,11 +4062,19 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   }
 }
 .testimonial-sec:has(+ .bg-light-gray) {
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
 }
 @media (max-width: 767.98px) {
   .testimonial-sec:has(+ .bg-light-gray) {
-    margin-bottom: 4.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+.testimonial-sec:has(+ .testimonial-sec) {
+  margin-bottom: 4rem;
+}
+@media (max-width: 767.98px) {
+  .testimonial-sec:has(+ .testimonial-sec) {
+    margin-bottom: 2rem;
   }
 }
 
@@ -6450,6 +6451,9 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 .side-nav-with-content .side-nav-wrap .right-content > .big-heading {
   margin-bottom: 0;
 }
+.side-nav-with-content .side-nav-wrap .right-content > .big-heading:has(+ .testimonial-sec) {
+  margin-bottom: 3rem;
+}
 .side-nav-with-content .side-nav-wrap .right-content .contact-us-sec .next-card {
   padding: 3rem;
 }
@@ -6514,7 +6518,7 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   left: auto;
   right: auto;
   bottom: 0.5rem;
-  background: rgba(0, 0, 0, 0.0392156863);
+  background: rgba(0, 0, 0, 0.5);
 }
 @media (max-width: 767.98px) {
   .card-color-hover .slide-text, .flip-tiles-gallery-grid .gallery-item a .slide-text {
@@ -6533,8 +6537,6 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   background-color: rgba(0, 0, 0, 0.0392156863);
 }
 .card-color-hover::after, .flip-tiles-gallery-grid .gallery-item a::after {
-  content: "";
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.8) 54.29%);
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -6573,6 +6575,7 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 }
 .card-color-hover:hover .slide-text, .flip-tiles-gallery-grid .gallery-item a:hover .slide-text {
   opacity: 1;
+  background: rgba(0, 0, 0, 0.01);
 }
 @media (min-width: 768px) {
   .card-color-hover:hover::after, .flip-tiles-gallery-grid .gallery-item a:hover::after {

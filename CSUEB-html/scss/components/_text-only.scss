@@ -536,10 +536,16 @@
   }
 
   &:has(+ .bg-light-gray) {
-    margin-bottom: rem.convert(96px);
+    margin-bottom: rem.convert(64px);
 
     @include media-breakpoint-down(md) {
-      margin-bottom: rem.convert(72px);
+      margin-bottom: rem.convert(40px);
+    }
+  }
+  &:has(+ .testimonial-sec){
+    margin-bottom: rem.convert(64px);
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem.convert(32px);
     }
   }
 }

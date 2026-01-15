@@ -249,18 +249,18 @@ section.bg-black+section.bg-black {
 
 section.bg-black.key-feature-sec+section.bg-black.key-feature-sec,
 section.bg-black+.bg-black.key-feature-sec {
-    padding-top: rem.convert(96px);
+    padding-top: rem.convert(64px);
 
     @include media-breakpoint-down(md) {
-        padding-top: rem.convert(72px);
+        padding-top: rem.convert(40px);
     }
 }
 
 section.bg-white.section-with-padding+section.bg-white {
-    padding-top: rem.convert(96px);
+    padding-top: rem.convert(64px);
 
     @include media-breakpoint-down(md) {
-        padding-top: rem.convert(72px);
+        padding-top: rem.convert(40px);
     }
 }
 
@@ -381,10 +381,10 @@ section.bg-white.section-with-padding+section.bg-white {
 }
 
 .card-gaping {
-    padding-top: rem.convert(96px);
+    padding-top: rem.convert(64px);
 
     @include media-breakpoint-down(md) {
-        padding-top: rem.convert(72px);
+        padding-top: rem.convert(40px);
     }
 }
 
@@ -984,10 +984,10 @@ section.bg-white.section-with-padding+section.bg-white {
 }
 
 .img-text-full-width-sec.bg-white:has(.main-img-slider)+.img-text-full-width-sec.bg-white:has(.main-img-slider) {
-    margin-top: rem.convert(96px);
+    margin-top: rem.convert(64px);
 
     @include media-breakpoint-down(md) {
-        margin-top: rem.convert(72px);
+        margin-top: rem.convert(40px);
     }
 }
 
@@ -1250,7 +1250,7 @@ html[hc="a4"] {
 
     .card-color-hover::after,
     .flip-tiles-gallery-grid .gallery-item a::after {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.3) 54.29%) !important;
+        //background: linear-gradient(180deg, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.3) 54.29%) !important;
     }
 
     .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .button-grp a {
