@@ -71,6 +71,12 @@
       .highlight {
         color: var(--gold);
       }
+      h1{
+        font-size: rem.convert(64px);
+        @include media-breakpoint-down(md) {
+          font-size: rem.convert(48px);
+        }
+      }
     }
 
     .actions {
@@ -388,6 +394,12 @@
           display: flex;
           flex-direction: column;
           gap: 24px;
+          h1{
+            font-size: rem.convert(64px);
+            @include media-breakpoint-down(md) {
+              font-size: rem.convert(48px);
+            }
+          }
 
           @include media-breakpoint-up(lg) {
             padding-left: 8.1rem;

@@ -98,13 +98,13 @@ h5, .h5  {
 
 .big-heading {
   font-family: var(--heading-font-family);
-  font-size: rem.convert(64px);
+  font-size: rem.convert(48px);
   font-style: normal;
   font-weight: 600;
   line-height: 1.1; /* 4.4rem */
   letter-spacing: -0.12rem;
    @include media-breakpoint-down(lg) {
-    font-size: rem.convert(48px);
+    font-size: rem.convert(40px);
     letter-spacing: -0.09rem;
   }
 }
