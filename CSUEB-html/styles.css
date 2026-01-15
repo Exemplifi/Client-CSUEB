@@ -101,26 +101,26 @@ h6,
 }
 
 h1, .h1 {
-  font-size: 6rem;
+  font-size: 3rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1;
 }
 @media (max-width: 1199.98px) {
   h1, .h1 {
-    font-size: 4rem;
+    font-size: 2.5rem;
   }
 }
 @media (max-width: 991.98px) {
   h1, .h1 {
-    font-size: 3rem;
+    font-size: 2.25rem;
     line-height: 1.1;
   }
 }
 
 h2, .h2 {
   font-family: var(--heading-font-family);
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.1;
@@ -128,14 +128,14 @@ h2, .h2 {
 }
 @media (max-width: 991.98px) {
   h2, .h2 {
-    font-size: 2.125rem;
+    font-size: 2rem;
     line-height: 1.2;
   }
 }
 
 h3, .h3 {
   font-family: var(--body-font-family);
-  font-size: 1.875rem;
+  font-size: 1.75rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.2; /* 2.25rem */
@@ -143,13 +143,13 @@ h3, .h3 {
 }
 @media (max-width: 1199.98px) {
   h3, .h3 {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     line-height: 1.4; /* 1.575rem */
   }
 }
 @media (max-width: 991.98px) {
   h3, .h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     line-height: 1.2; /* 2.55rem */
     letter-spacing: normal;
   }
@@ -351,31 +351,31 @@ ul {
 }
 
 .section {
-  padding: 6rem 0rem;
+  padding: 3rem 0rem;
 }
 @media (max-width: 767.98px) {
   .section {
-    padding: 2.5rem 0rem;
+    padding: 2rem 0rem;
   }
 }
 @media (max-width: 991.98px) {
   .section.testimonial-with-paralax.bg-red {
-    padding: 4.5rem 1rem;
+    padding: 3rem 1rem;
   }
 }
 @media (max-width: 767.98px) {
   .section.testimonial-with-paralax.bg-red {
-    padding: 48x 1rem;
+    padding: 2.5rem 1rem;
   }
 }
 @media (max-width: 991.98px) {
   .section.testimonial-sec {
-    padding: 4.5rem 1rem;
+    padding: 3rem 1rem;
   }
 }
 @media (max-width: 767.98px) {
   .section.testimonial-sec {
-    padding: 3rem 0;
+    padding: 2.5rem 0;
   }
 }
 
@@ -2328,6 +2328,12 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 }
 .accordion-menu .accordion-item .accordion-button:not(.collapsed) .accordion-icon:hover {
   background-color: var(--dark-red);
+}
+.accordion-menu .accordion-item .accordion-button:not(.collapsed) .accordion-icon:hover svg {
+  color: var(--white);
+}
+.accordion-menu .accordion-item .accordion-button:not(.collapsed) .accordion-icon:hover svg path {
+  fill: var(--white);
 }
 .accordion-menu .accordion-collapse .accordion-body {
   padding-bottom: 1.5rem;
@@ -4300,11 +4306,11 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 
 .contact-us-sec {
   position: relative;
-  padding-top: 6rem !important;
+  padding-top: 3rem !important;
 }
 @media (max-width: 767.98px) {
   .contact-us-sec {
-    padding-top: 4.5rem !important;
+    padding-top: 3rem !important;
   }
 }
 .contact-us-sec::after {
@@ -4903,11 +4909,11 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   }
 }
 .text-button-sec:has(.section-heading) {
-  padding: 6rem 0;
+  padding: 3rem 0;
 }
 @media (max-width: 767.98px) {
   .text-button-sec:has(.section-heading) {
-    padding: 4.5rem 0;
+    padding: 3rem 0;
   }
 }
 
@@ -6307,11 +6313,11 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   font-weight: 500;
 }
 .side-nav-with-content .side-nav-wrap .right-content .big-main-row {
-  margin-bottom: 6rem;
+  margin-bottom: 3rem;
 }
 @media (max-width: 1199.98px) {
   .side-nav-with-content .side-nav-wrap .right-content .big-main-row {
-    margin-bottom: 4.5rem;
+    margin-bottom: 3rem;
   }
 }
 @media (max-width: 767.98px) {

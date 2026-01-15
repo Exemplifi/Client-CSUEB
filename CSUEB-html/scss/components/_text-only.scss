@@ -810,10 +810,10 @@
 
 .contact-us-sec {
   position: relative;
-  padding-top: rem.convert(96px) !important;
+  padding-top: rem.convert(48px) !important;
 
   @include media-breakpoint-down(md) {
-    padding-top: rem.convert(72px) !important;
+    padding-top: rem.convert(48px) !important;
   }
 
   &::after {
@@ -1524,10 +1524,10 @@
   }
 
   &:has(.section-heading) {
-    padding: rem.convert(96px 0);
+    padding: rem.convert(48px 0);
 
     @include media-breakpoint-down(md) {
-      padding: rem.convert(72px 0);
+      padding: rem.convert(48px 0);
     }
   }
 }

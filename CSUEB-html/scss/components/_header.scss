@@ -696,6 +696,12 @@
 
           &:hover {
             background-color: var(--dark-red);
+            svg{
+              color: var(--white);
+              path{
+                fill: var(--white);
+              }
+            }
           }
         }
       }

@@ -27,15 +27,15 @@ h6,
 
 
 h1, .h1 {
-  font-size: rem.convert(96px);
+  font-size: rem.convert(48px);
   font-style: normal;
   font-weight: $semibold;
   line-height: 1;
   @include media-breakpoint-down(xl) {
-    font-size: rem.convert(64px);
+    font-size: rem.convert(40px);
   }
   @include media-breakpoint-down(lg) {
-    font-size: rem.convert(48px);
+    font-size: rem.convert(36px);
     line-height: 1.10; 
   }
 }
@@ -44,7 +44,7 @@ h1, .h1 {
 
 h2, .h2 {
   font-family: var(--heading-font-family);
-  font-size: rem.convert(48px);
+  font-size: rem.convert(40px);
   font-style: normal;
   font-weight: $semibold;
   line-height:1.10; 
@@ -52,24 +52,24 @@ h2, .h2 {
  
  
   @include media-breakpoint-down(lg) {
-    font-size: rem.convert(34px);
+    font-size: rem.convert(32px);
     line-height: 1.2; 
   }
 }
 
 h3, .h3 {
   font-family: var(--body-font-family);
-  font-size: rem.convert(30px);
+  font-size: rem.convert(28px);
   font-style: normal;
   font-weight: $semibold;
   line-height: 1.2; /* 2.25rem */
   letter-spacing: -0.05625rem;
   @include media-breakpoint-down(xl) {
-    font-size: rem.convert(24px);
+    font-size: rem.convert(22px);
     line-height: 1.4; /* 1.575rem */
   }
   @include media-breakpoint-down(lg) {
-    font-size: rem.convert(24px);
+    font-size: rem.convert(20px);
     line-height: 1.2; /* 2.55rem */
     letter-spacing: normal;
   }

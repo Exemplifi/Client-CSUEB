@@ -45,22 +45,22 @@ ul {
 }
 
 .section {
-    padding: rem.convert(96px 0px);
+    padding: rem.convert(48px 0px);
 
     @include media-breakpoint-down(md) {
-        padding: rem.convert(40px 0px);
+        padding: rem.convert(32px 0px);
 
     }
 
     &.testimonial-with-paralax {
         &.bg-red {
             @include media-breakpoint-down(lg) {
-                padding: rem.convert(72px 16px);
+                padding: rem.convert(48px 16px);
 
             }
 
             @include media-breakpoint-down(md) {
-                padding: rem.convert(48x 16px);
+                padding: rem.convert(40px 16px);
 
             }
         }
@@ -68,12 +68,12 @@ ul {
 
     &.testimonial-sec {
         @include media-breakpoint-down(lg) {
-            padding: rem.convert(72px 16px);
+            padding: rem.convert(48px 16px);
 
         }
 
         @include media-breakpoint-down(md) {
-            padding: rem.convert(48px 0);
+            padding: rem.convert(40px 0);
 
         }
 

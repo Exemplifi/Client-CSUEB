@@ -1712,10 +1712,10 @@
       }
 
       .big-main-row {
-        margin-bottom: rem.convert(96px);
+        margin-bottom: rem.convert(48px);
 
         @include media-breakpoint-down(xl) {
-          margin-bottom: rem.convert(72px);
+          margin-bottom: rem.convert(48px);
         }
 
         @include media-breakpoint-down(md) {
