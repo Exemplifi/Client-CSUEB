@@ -6898,11 +6898,11 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 .home-hero-sec .content-section .tagline .highlight {
   color: var(--gold);
 }
-.home-hero-sec .content-section .tagline h1 {
+.home-hero-sec .content-section .tagline h1, .home-hero-sec .content-section .tagline .h1 {
   font-size: 4rem;
 }
 @media (max-width: 767.98px) {
-  .home-hero-sec .content-section .tagline h1 {
+  .home-hero-sec .content-section .tagline h1, .home-hero-sec .content-section .tagline .h1 {
     font-size: 3rem;
   }
 }
@@ -7133,11 +7133,11 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   flex-direction: column;
   gap: 24px;
 }
-.inner-hero-full-slider .inner-hero-slider .swiper-slide .content-section .slider-heading h1 {
+.inner-hero-full-slider .inner-hero-slider .swiper-slide .content-section .slider-heading h1, .inner-hero-full-slider .inner-hero-slider .swiper-slide .content-section .slider-heading .h1 {
   font-size: 4rem;
 }
 @media (max-width: 767.98px) {
-  .inner-hero-full-slider .inner-hero-slider .swiper-slide .content-section .slider-heading h1 {
+  .inner-hero-full-slider .inner-hero-slider .swiper-slide .content-section .slider-heading h1, .inner-hero-full-slider .inner-hero-slider .swiper-slide .content-section .slider-heading .h1 {
     font-size: 3rem;
   }
 }
