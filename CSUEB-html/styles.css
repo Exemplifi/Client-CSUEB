@@ -7103,7 +7103,7 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 }
 .inner-hero-full-slider .inner-hero-slider .swiper-slide .img-wrapper::after {
   content: "";
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
   position: absolute;
   inset: 0;
   z-index: 2;

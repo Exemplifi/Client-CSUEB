@@ -356,7 +356,7 @@
 
         &::after {
           content: "";
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.8) 100%);
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, rgba(0, 0, 0, 0.8) 100%);
           position: absolute;
           inset: 0;
           z-index: 2;
