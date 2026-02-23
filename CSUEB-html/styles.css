@@ -6616,7 +6616,7 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 }
 .full-video-sec .video-wrap {
   position: relative;
-  max-width: 58rem;
+  max-width: 100%;
   margin: 0 auto;
 }
 .full-video-sec .video-wrap .play-btn {
@@ -8955,6 +8955,157 @@ table:not(.gssb_c) {
 
 .gsc-orderby-label {
   color: var(--black);
+}
+
+.text-card-link-section {
+  position: relative;
+}
+.text-card-link-section .container-smaller {
+  position: relative;
+  z-index: 3;
+}
+.text-card-link-section h2 {
+  color: var(--white);
+}
+.text-card-link-section .section-heading {
+  margin-bottom: 3rem;
+}
+@media (max-width: 767.98px) {
+  .text-card-link-section .section-heading {
+    margin-bottom: 1.5rem;
+  }
+}
+.text-card-link-section .title-wrap {
+  margin-bottom: 1.5rem;
+}
+.text-card-link-section .title-wrap svg path {
+  fill: var(--white);
+}
+.text-card-link-section .heading-content p,
+.text-card-link-section .heading-content span {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--white);
+  max-width: 75%;
+}
+.text-card-link-section .section-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+.text-card-link-section::after {
+  content: "";
+  background: linear-gradient(0deg, rgba(213, 0, 50, 0.7) 0%, rgba(213, 0, 50, 0.7) 100%);
+  background-position: top center;
+  background-repeat: repeat;
+  background-size: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: absolute;
+  inset: 0;
+}
+.text-card-link-section .card-row-wrapper {
+  row-gap: 1.5rem;
+}
+.text-card-link-section .text-link-card {
+  background-color: var(--white);
+  padding: 1.5rem 1rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  height: 100%;
+  border: 12px solid transparent;
+  transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+}
+.text-card-link-section .text-link-card:hover {
+  border-color: var(--purple);
+  transform: translateY(-4px);
+}
+.text-card-link-section .text-link-card:nth-child(2):hover {
+  border-color: var(--gold) !important;
+}
+.text-card-link-section .text-link-card:nth-child(3):hover {
+  border-color: var(--teal) !important;
+}
+.text-card-link-section .text-link-card .card-heading h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+.text-card-link-section .text-link-card .card-content p {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--dark-grey);
+}
+.text-card-link-section .text-link-card .button-grp {
+  margin-top: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+}
+.text-card-link-section .card-row-wrapper > .col-12.col-md-4:nth-child(2) .text-link-card:hover {
+  border-color: var(--gold) !important;
+}
+.text-card-link-section .card-row-wrapper > .col-12.col-md-4:nth-child(3) .text-link-card:hover {
+  border-color: var(--teal) !important;
+}
+
+.testimonial-sec .heading-row .section-heading {
+  max-width: 50rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.testimonial-sec .heading-row .section-heading .title-wrap * {
+  color: var(--white);
+}
+.testimonial-sec .heading-row .section-heading .title-wrap {
+  margin-bottom: 2rem;
+}
+.testimonial-sec .heading-row .section-heading .heading-content {
+  margin-bottom: 3rem;
+}
+.testimonial-sec .heading-row .section-heading .heading-content p, .testimonial-sec .heading-row .section-heading .heading-content span {
+  color: var(--white);
+}
+
+.scroll-counter-section .section-heading {
+  margin-bottom: 3rem;
+}
+@media (max-width: 767.98px) {
+  .scroll-counter-section .section-heading {
+    margin-bottom: 1.5rem;
+  }
+}
+.scroll-counter-section .title-wrap {
+  margin-bottom: 1.5rem;
+}
+.scroll-counter-section .heading-content p,
+.scroll-counter-section .heading-content span {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--dark-grey);
+  max-width: 75%;
+}
+@media (max-width: 991.98px) {
+  .scroll-counter-section .heading-content p,
+  .scroll-counter-section .heading-content span {
+    max-width: 100%;
+  }
+}
+.scroll-counter-section .counter-card-row {
+  row-gap: 1.5rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

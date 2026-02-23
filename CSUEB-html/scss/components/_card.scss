@@ -1,0 +1,189 @@
+.text-card-link-section {
+    position: relative;
+
+    .container-smaller {
+        position: relative;
+        z-index: 3;
+    }
+
+    h2 {
+        color: var(--white);
+    }
+    .section-heading{
+        margin-bottom: rem.convert(48px);
+        @include media-breakpoint-down(md) {
+            margin-bottom: rem.convert(24px);
+        }
+
+    }
+
+    .title-wrap {
+        margin-bottom: rem.convert(24px);
+
+        svg {
+            path {
+                fill: var(--white);
+            }
+        }
+
+    }
+
+    .heading-content {
+
+        p,
+        span {
+            font-size: rem.convert(16px);
+            font-weight: $medium;
+            line-height: 1.5;
+            color: var(--white);
+            max-width: 75%;
+        }
+    }
+
+    .section-bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    &::after {
+        content: "";
+        background: linear-gradient(0deg, rgba(213, 0, 50, 0.7) 0%, rgba(213, 0, 50, 0.7) 100%);
+        background-position: top center;
+        background-repeat: repeat;
+        background-size: 100%;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        position: absolute;
+        inset: 0;
+    }
+
+    .card-row-wrapper {
+        row-gap: rem.convert(24px);
+    }
+
+    .text-link-card {
+        background-color: var(--white);
+        padding: rem.convert(24px 16px);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        height: 100%;
+        border: 12px solid transparent;
+        transform: translateY(0);
+        transition: all 0.4s ease-in-out;
+
+        &:hover {
+            border-color: var(--purple);
+            transform: translateY(-4px);
+        }
+
+        &:nth-child(2) {
+            &:hover {
+                border-color: var(--gold) !important;
+            }
+        }
+        &:nth-child(3) {
+            &:hover {
+                border-color: var(--teal) !important;
+            }
+        }
+
+        .card-heading {
+            h3 {
+                font-size: rem.convert(24px);
+                font-weight: $semibold;
+                line-height: 1.2;
+                color: var(--black);
+                margin-bottom: rem.convert(16px);
+            }
+        }
+
+        .card-content {
+            p {
+                font-size: rem.convert(16px);
+                font-weight: $medium;
+                line-height: 1.5;
+                color: var(--dark-grey);
+            }
+        }
+
+        .button-grp {
+            margin-top: rem.convert(16px);
+            display: inline-flex;
+            flex-direction: column;
+        }
+    }
+    .card-row-wrapper > .col-12.col-md-4:nth-child(2) {
+        .text-link-card {
+            &:hover {
+                border-color: var(--gold) !important;
+            }
+        }
+    }
+    .card-row-wrapper > .col-12.col-md-4:nth-child(3) {
+        .text-link-card {
+            &:hover {
+                border-color: var(--teal) !important;
+            }
+        }
+    }
+}
+
+.testimonial-sec {
+    .heading-row{
+        .section-heading {
+            max-width: rem.convert(800px);
+            margin: 0 auto;
+            text-align: center;
+    
+            .title-wrap * {
+                color: var(--white);
+            }
+            .title-wrap{
+                margin-bottom: rem.convert(32px);
+            }
+            .heading-content{
+                margin-bottom: rem.convert(48px);
+                p, span{
+                    color: var(--white);
+                }
+            }
+        }
+    }
+    
+}
+.scroll-counter-section{
+    .section-heading{
+        margin-bottom: rem.convert(48px);
+        @include media-breakpoint-down(md) {
+            margin-bottom: rem.convert(24px);
+        }
+    }
+    .title-wrap {
+        margin-bottom: rem.convert(24px);
+    }
+    .heading-content {
+        p,
+        span {
+            font-size: rem.convert(16px);
+            font-weight: $medium;
+            line-height: 1.5;
+            color: var(--dark-grey);
+            max-width: 75%;
+            @include media-breakpoint-down(lg) {
+                max-width: 100%;
+            }
+        }
+    }
+    .counter-card-row{
+        row-gap: rem.convert(24px);
+    }   
+}
