@@ -8961,7 +8961,7 @@ table:not(.gssb_c) {
 .text-card-link-section {
   position: relative;
 }
-.text-card-link-section .container-smaller {
+.text-card-link-section .container {
   position: relative;
   z-index: 3;
 }
@@ -9026,12 +9026,17 @@ table:not(.gssb_c) {
 }
 .text-card-link-section .text-link-card {
   background-color: var(--white);
-  padding: 1.5rem 1rem;
+  padding: 3rem 1.5rem;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   height: 100%;
   border: 8px solid transparent;
   transform: translateY(0);
   transition: all 0.4s ease-in-out;
+}
+@media (max-width: 991.98px) {
+  .text-card-link-section .text-link-card {
+    padding: 1.5rem 1rem;
+  }
 }
 .text-card-link-section .text-link-card:hover {
   border-color: var(--purple);
@@ -9057,7 +9062,7 @@ table:not(.gssb_c) {
   color: var(--dark-grey);
 }
 .text-card-link-section .text-link-card .button-grp {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: inline-flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -9140,7 +9145,7 @@ table:not(.gssb_c) {
 }
 .counter-card .counter-label {
   font-size: 1rem;
-  color: var(--black);
+  color: var(--dark-grey);
   font-weight: 500;
   line-height: 1.75;
   text-align: center;

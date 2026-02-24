@@ -1,7 +1,7 @@
 .text-card-link-section {
     position: relative;
 
-    .container-smaller {
+    .container {
         position: relative;
         z-index: 3;
     }
@@ -76,12 +76,15 @@
 
     .text-link-card {
         background-color: var(--white);
-        padding: rem.convert(24px 16px);
+        padding: rem.convert(48px 24px);
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         height: 100%;
         border: 8px solid transparent;
         transform: translateY(0);
         transition: all 0.4s ease-in-out;
+        @include media-breakpoint-down(lg) {
+            padding: rem.convert(24px 16px);
+        }
 
         &:hover {
             border-color: var(--purple);
@@ -119,7 +122,7 @@
         }
 
         .button-grp {
-            margin-top: rem.convert(16px);
+            margin-top: rem.convert(24px);
             display: inline-flex;
             flex-direction: column;
             gap: rem.convert(8px);
@@ -212,7 +215,7 @@
     }
     .counter-label {
         font-size: 1rem;
-        color: var(--black);
+        color: var(--dark-grey);
         font-weight: 500;
         line-height: 1.75;
         text-align: center;
@@ -229,10 +232,6 @@
     flex-direction: column;
     gap: 0.5rem;
 }
-
-
-
-
 @media (prefers-reduced-motion: reduce) {
     .counter-card {
         transition: none;
