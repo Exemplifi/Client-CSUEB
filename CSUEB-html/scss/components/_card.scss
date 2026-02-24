@@ -37,6 +37,9 @@
             line-height: 1.5;
             color: var(--white);
             max-width: 75%;
+            @include media-breakpoint-down(lg) {
+                max-width: 100%;
+            }
         }
     }
 
@@ -56,7 +59,7 @@
 
     &::after {
         content: "";
-        background: linear-gradient(0deg, rgba(213, 0, 50, 0.7) 0%, rgba(213, 0, 50, 0.7) 100%);
+        background: rgba(0, 0, 0, 0.8);
         background-position: top center;
         background-repeat: repeat;
         background-size: 100%;
@@ -76,7 +79,7 @@
         padding: rem.convert(24px 16px);
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         height: 100%;
-        border: 12px solid transparent;
+        border: 8px solid transparent;
         transform: translateY(0);
         transition: all 0.4s ease-in-out;
 
@@ -119,6 +122,7 @@
             margin-top: rem.convert(16px);
             display: inline-flex;
             flex-direction: column;
+            gap: rem.convert(8px);
         }
     }
     .card-row-wrapper > .col-12.col-md-4:nth-child(2) {
@@ -138,27 +142,26 @@
 }
 
 .testimonial-sec {
-    .heading-row{
+    .heading-row {
         .section-heading {
             max-width: rem.convert(800px);
             margin: 0 auto;
             text-align: center;
-    
-            .title-wrap * {
-                color: var(--white);
-            }
-            .title-wrap{
+
+            .title-wrap {
                 margin-bottom: rem.convert(32px);
+                * {
+                    color: var(--white);
+                }
             }
-            .heading-content{
+            .heading-content {
                 margin-bottom: rem.convert(48px);
-                p, span{
+                p, span {
                     color: var(--white);
                 }
             }
         }
     }
-    
 }
 .scroll-counter-section{
     .section-heading{
@@ -186,4 +189,56 @@
     .counter-card-row{
         row-gap: rem.convert(24px);
     }   
+}
+ /* Scroll Counter Card Component */
+ .scroll-counter-section {
+    background-color: var(--light-gray);
+}
+
+.counter-card {
+    background: var(--white);
+    padding:rem.convert(48px 32px);
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .counter-value {
+        @extend .h2;
+        color: var(--black);
+        text-align: center;
+        font-size: rem.convert(48px);
+        margin-bottom: rem.convert(8px);
+        @media-breakpoint-down(md) {
+            font-size: rem.convert(32px);
+        }
+    }
+    .counter-label {
+        font-size: 1rem;
+        color: var(--black);
+        font-weight: 500;
+        line-height: 1.75;
+        text-align: center;
+    }
+    
+}
+
+.counter-card:hover {
+    transform: translateY(-4px);
+}
+
+.counter-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+
+
+
+@media (prefers-reduced-motion: reduce) {
+    .counter-card {
+        transition: none;
+    }
+
+    .counter-card:hover {
+        transform: none;
+    }
 }
