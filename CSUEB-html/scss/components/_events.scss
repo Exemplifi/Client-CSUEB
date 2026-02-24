@@ -1,14 +1,17 @@
 .event-calendar-section {
     padding: rem.convert(48px 0 96px 0);
+
     @include media-breakpoint-down(lg) {
         padding: rem.convert(32px 0 64px 0);
     }
 
     .upcoming-events-wrapper {
         margin-top: rem.convert(48px);
+
         @include media-breakpoint-down(lg) {
             margin-top: rem.convert(32px);
         }
+
         @include media-breakpoint-down(lg) {
             padding-right: 0;
         }
@@ -54,17 +57,21 @@
     .upcoming-events-list-wrapper {
         margin-top: rem.convert(48px);
         row-gap: 1.25rem;
+
         @include media-breakpoint-up(md) {
             --bs-gutter-x: 1.25rem;
         }
+
         @include media-breakpoint-down(lg) {
             margin-top: rem.convert(32px);
         }
+
         @include media-breakpoint-down(lg) {
             padding-right: 0;
-           .col-12{
-            padding-right: 0;
-           }
+
+            .col-12 {
+                padding-right: 0;
+            }
         }
     }
 
@@ -116,11 +123,13 @@
 
     .load-more-events {
         margin-top: rem.convert(48px);
+
         @include media-breakpoint-down(lg) {
             margin-top: rem.convert(32px);
         }
     }
-    .container-smaller{
+
+    .container-smaller {
         @include media-breakpoint-down(xxl) {
             padding-inline: 2rem;
         }
@@ -228,5 +237,144 @@
     .button-wrapper {
         display: flex;
         gap: 12px;
+    }
+}
+
+.event-calendar-details-section {
+    padding: rem.convert(48px 0 96px 0);
+
+    @include media-breakpoint-down(lg) {
+        padding: rem.convert(32px 0 64px 0);
+    }
+
+    .section-heading {
+        .title-wrap {
+            margin-bottom: rem.convert(16px);
+        }
+
+        .heading-content {
+            p {
+                font-size: rem.convert(16px);
+                font-weight: 500;
+                line-height: 1.75;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .event-details-wrapper {
+        .event-locations {
+            display: flex;
+            gap: rem.convert(8px);
+            margin-top: rem.convert(48px);
+            @include media-breakpoint-down(md) {
+                margin-top: rem.convert(24px);
+            }
+
+            .icon-wrap {
+                flex: 0 0 18px;
+            }
+
+            a {
+                text-decoration-line: underline;
+                text-decoration-style: solid;
+                text-decoration-skip-ink: none;
+                text-decoration-thickness: auto;
+                text-underline-offset: 2px;
+                background: transparent;
+                color: var(--red) !important;
+                display: inline-flex;
+                word-break: break-word;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    background: rgba(213, 0, 50, 0.1);
+                    text-decoration-color: transparent;
+                }
+            }
+        }
+
+        .add-to-calendar-wrap {
+            margin-top: rem.convert(48px);
+            @include media-breakpoint-down(md) {
+                margin-top: rem.convert(24px);
+            }
+
+            .title {
+                padding: 8px 0;
+            }
+
+            .buttons-wrapper {
+                display: flex;
+                gap: rem.convert(8px);
+
+                button {
+                    background-color: transparent;
+                    border: none;
+
+                    svg {
+                        path {
+                            transition: all 0.3s ease-in-out;
+                        }
+                    }
+
+                    &:hover {
+                        svg {
+                            path {
+                                stroke: var(--black);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .event-details-content {
+            margin-top: rem.convert(48px);
+            padding: rem.convert(64px);
+            border: 12px solid var(--red);
+
+            @include media-breakpoint-down(md) {
+                margin-top: rem.convert(32px);
+                padding: rem.convert(24px);
+                border: 8px solid var(--red);
+            }
+
+            .section-heading {
+                margin-bottom: rem.convert(48px);
+
+                @include media-breakpoint-down(md) {
+                    margin-bottom: rem.convert(32px);
+                }
+            }
+
+            .event-detais-item {
+                margin-bottom: rem.convert(32px);
+                @include media-breakpoint-down(md) {
+                    margin-bottom: rem.convert(24px);
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                h3 {
+                    @extend h4;
+                    margin-bottom: rem.convert(16px);
+                    @include media-breakpoint-down(md) {
+                        margin-bottom: rem.convert(8px);
+                    }
+                }
+
+                p {
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
     }
 }
