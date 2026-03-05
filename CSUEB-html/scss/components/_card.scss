@@ -5,10 +5,19 @@
         position: relative;
         z-index: 3;
     }
-
-    h2 {
-        color: var(--white);
+    &:not(.no-bg){
+        h2 {
+            color: var(--white);
+        }
+        .title-wrap {
+            svg {
+                path {
+                    fill: var(--white);
+                }
+            }
+        }
     }
+ 
     .section-heading{
         margin-bottom: rem.convert(48px);
         @include media-breakpoint-down(md) {
@@ -19,13 +28,6 @@
 
     .title-wrap {
         margin-bottom: rem.convert(24px);
-
-        svg {
-            path {
-                fill: var(--white);
-            }
-        }
-
     }
 
     .heading-content {
@@ -142,6 +144,18 @@
             }
         }
     }
+    &.no-bg{
+        .section-bg-overlay{
+            display: none;
+        }
+        &::after{
+            display: none;
+        }
+        .text-link-card{
+            background-color: var(--light-gray);
+            box-shadow: none;
+        }
+    }
 }
 
 .testimonial-sec {
@@ -220,7 +234,14 @@
         line-height: 1.75;
         text-align: center;
     }
-    
+    .button-grp {
+        margin-top: rem.convert(16px);
+        display: flex;
+        flex-direction: column;
+        gap: rem.convert(8px);
+        text-align: center;
+        align-items: center;
+    }
 }
 
 .counter-card:hover {
