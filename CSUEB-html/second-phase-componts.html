@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="scss/accessibility.css">
     <link rel="stylesheet" href="override.css">
     <style>
-       
+
     </style>
 </head>
 
@@ -712,8 +712,8 @@
         <!-- Text Link Card Section End -->
 
 
-         <!-- Scroll Counter Cards Section -->
-         <section class="section scroll-counter-section">
+        <!-- Scroll Counter Cards Section -->
+        <section class="section scroll-counter-section">
             <div class="container">
                 <!-- Section Heading Start -->
                 <div class="row">
@@ -743,19 +743,28 @@
                     <div class="col-12 col-md-4">
                         <div class="counter-card">
                             <div class="counter-card-inner">
-                                <span class="counter-value" data-target="15000" data-prefix="" data-suffix="+">0</span>
+                                <span class="counter-value" data-target="1,52,2,000" data-prefix=""
+                                    data-suffix="+">0</span>
                                 <span class="counter-label">Students Enrolled</span>
                             </div>
                             <div class="button-grp">
-                                <a class="text-decoration-none btn btn-secondary btn-secondary-small" href="#" target="_self">
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="arrow" fill="none" height="25" viewBox="0 0 24 25" width="24">
-                                        <path d="M14 5.60693L12.5 7.10693L17.0703 11.6772H3V13.6772H17.0703L12.5 18.2476L14 19.7476L21.0703 12.6772L14 5.60693Z" fill="currentColor"></path>
+                                <a class="text-decoration-none btn btn-secondary btn-secondary-small" href="#"
+                                    target="_self">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="arrow" fill="none"
+                                        height="25" viewBox="0 0 24 25" width="24">
+                                        <path
+                                            d="M14 5.60693L12.5 7.10693L17.0703 11.6772H3V13.6772H17.0703L12.5 18.2476L14 19.7476L21.0703 12.6772L14 5.60693Z"
+                                            fill="currentColor"></path>
                                     </svg>
                                     <span>Apply Now</span>
                                 </a>
-                                <a class="text-decoration-none btn btn-secondary btn-secondary-small" href="facts.html" target="_self">
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="arrow" fill="none" height="25" viewBox="0 0 24 25" width="24">
-                                        <path d="M14 5.60693L12.5 7.10693L17.0703 11.6772H3V13.6772H17.0703L12.5 18.2476L14 19.7476L21.0703 12.6772L14 5.60693Z" fill="currentColor"></path>
+                                <a class="text-decoration-none btn btn-secondary btn-secondary-small" href="facts.html"
+                                    target="_self">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="arrow" fill="none"
+                                        height="25" viewBox="0 0 24 25" width="24">
+                                        <path
+                                            d="M14 5.60693L12.5 7.10693L17.0703 11.6772H3V13.6772H17.0703L12.5 18.2476L14 19.7476L21.0703 12.6772L14 5.60693Z"
+                                            fill="currentColor"></path>
                                     </svg>
                                     <span>Learn More</span>
 
@@ -774,7 +783,7 @@
                     <div class="col-12 col-md-4">
                         <div class="counter-card">
                             <div class="counter-card-inner">
-                                <span class="counter-value" data-target="50" data-prefix="" data-suffix="+">0</span>
+                                <span class="counter-value" data-target="500" data-prefix="" data-suffix="+">0</span>
                                 <span class="counter-label">Programs Offered</span>
                             </div>
                         </div>
@@ -785,8 +794,8 @@
         <!-- Scroll Counter Cards Section End -->
 
         <!-- Testimonial Section With Heading Start -->
-        <section class="section testimonial-sec position-relative no-pseudo">
-            <div class="container-smaller position-relative">
+        <section class="section testimonial-sec-with-heading">
+            <div class="container-smaller">
                 <!-- Section Heading Start -->
                 <div class="row heading-row">
                     <div class="col-12">
@@ -811,6 +820,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="section position-relative testimonial-sec position-relative no-pseudo">
                 <div class="next-card bg-white text-black">
                     <div class="swiper testimonial-slider swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden"
                         id="testimonial-carousel">
@@ -1071,7 +1082,7 @@
                 </div>
             </div>
         </section>
-       
+
 
     </main>
 
@@ -1274,13 +1285,56 @@
             };
 
             const animateCounter = (el) => {
-                const target = parseInt(el.getAttribute('data-target'), 10);
+                const rawTarget = (el.getAttribute('data-target') || '0').trim();
                 const prefix = el.getAttribute('data-prefix') || '';
                 const suffix = el.getAttribute('data-suffix') || '';
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+                let target;
+                let formatNum;
+
+                if (/\D/.test(rawTarget)) {
+                    const commaIdx = rawTarget.indexOf(',');
+                    const hasComma = commaIdx !== -1;
+                    const afterComma = hasComma ? rawTarget.slice(commaIdx + 1) : '';
+                    const isDecimalComma = hasComma && /^\d{1,2}$/.test(afterComma) && !rawTarget.includes('.');
+
+                    if (isDecimalComma) {
+                        const parts = rawTarget.split(',');
+                        const intPart = (parts[0].replace(/\s/g, '') || '0').replace(/\D/g, '') || '0';
+                        const decPart = (parts[1] || '0').replace(/\D/g, '') || '0';
+                        const decPlaces = decPart.length;
+                        target = parseFloat(intPart + '.' + decPart) || 0;
+                        formatNum = (n) => {
+                            const i = Math.floor(n);
+                            const d = (n - i).toFixed(decPlaces).slice(2).padEnd(decPlaces, '0');
+                            return decPlaces ? i + '.' + d : String(i);
+                        };
+                    } else {
+                        target = parseInt(rawTarget.replace(/\D/g, ''), 10) || 0;
+                        const segmentLengths = rawTarget.split(',').map(p => (p.replace(/\D/g, '').length));
+                        formatNum = (n) => {
+                            const s = Math.round(n).toString();
+                            if (segmentLengths.length <= 1 || s.length === 0) return s;
+                            let out = '';
+                            let idx = 0;
+                            for (let i = 0; i < segmentLengths.length && idx < s.length; i++) {
+                                if (i > 0) out += ',';
+                                const len = segmentLengths[i];
+                                out += s.slice(idx, idx + len);
+                                idx += len;
+                            }
+                            if (idx < s.length) out += s.slice(idx);
+                            return out || s;
+                        };
+                    }
+                } else {
+                    target = parseInt(rawTarget, 10) || 0;
+                    formatNum = (n) => String(Math.round(n));
+                }
+
                 if (prefersReducedMotion) {
-                    el.textContent = prefix + target + suffix;
+                    el.textContent = prefix + formatNum(target) + suffix;
                     return;
                 }
 
@@ -1292,12 +1346,12 @@
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
                     const easeOut = 1 - Math.pow(1 - progress, 2);
-                    const current = Math.floor(easeOut * (target - startVal) + startVal);
-                    el.textContent = prefix + current + suffix;
+                    const current = easeOut * (target - startVal) + startVal;
+                    el.textContent = prefix + formatNum(current) + suffix;
                     if (progress < 1) {
                         requestAnimationFrame(updateCounter);
                     } else {
-                        el.textContent = prefix + target + suffix;
+                        el.textContent = prefix + formatNum(target) + suffix;
                     }
                 };
                 requestAnimationFrame(updateCounter);

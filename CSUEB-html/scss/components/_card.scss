@@ -158,26 +158,14 @@
     }
 }
 
-.testimonial-sec {
+.testimonial-sec-with-heading {
+    padding-bottom: 0;
     .heading-row {
-        .section-heading {
-            max-width: rem.convert(800px);
-            margin: 0 auto;
-            text-align: center;
-
-            .title-wrap {
-                margin-bottom: rem.convert(32px);
-                * {
-                    color: var(--white);
-                }
-            }
-            .heading-content {
-                margin-bottom: rem.convert(48px);
-                p, span {
-                    color: var(--white);
-                }
-            }
-        }
+       .section-heading {
+        max-width: rem.convert(800px);
+        margin: 0 auto;
+        
+       }
     }
 }
 .scroll-counter-section{
