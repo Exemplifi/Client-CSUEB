@@ -458,7 +458,7 @@
             </nav>
         </section>
         <!-- breadcrumb End -->
-        
+
         <!-- Event Calendar Section Start -->
         <section class="event-calendar-section">
             <div class="container-smaller">
@@ -489,41 +489,50 @@
                     <div class="col-12">
                         <form>
                             <div class="row event-calendar-filter-form">
-                                <div class="col-12 col-lg-9 input-wrapper">
+                                <div class="col-12 input-wrapper mx-auto">
                                     <div class="row">
-                                        <div class="col-6 col-lg-3">
-                                            <label for="sort-by-date" class="form-label screen-only"
-                                                aria-label="Filter by Date">Sort by</label>
-                                            <select id="sort-by-date" class="form-select">
-                                                <option value="">Sort by</option>
-                                                <option value="date">Sort by Date</option>
-                                                <option value="date">Sort by Name</option>
-                                                <option value="">Sort by Popularity</option>
-                                            </select>
+                                        <div class="col-12">
+                                            <label for="search" class="form-label screen-only"
+                                                aria-label="Search">Search</label>
+                                            <input type="search" id="search" class="form-control" placeholder="Search">
                                         </div>
-                                        <div class="col-6 col-lg-3">
-                                            <label for="experience" class="form-label screen-only"
-                                                aria-label="Filter by Experience">Experience</label>
-                                            <select id="sort-by-date" class="form-select">
-                                                <option value="">Experience</option>
-                                                <option value="1">Experience 1</option>
-                                                <option value="2">Experience 2</option>
-                                            </select>
+                                        <div class="col-12 col-lg-3">
+                                            <label for="from-date" class="form-label screen-only"
+                                                aria-label="Filter by From Date">From</label>
+                                            <input type="date" id="from-date" class="form-control form-select">
                                         </div>
-                                        <div class="col-6 col-lg-3">
+                                        <div class="col-12 col-lg-3">
+                                            <label for="to-date" class="form-label screen-only"
+                                                aria-label="Filter by To Date">To</label>
+                                            <input type="date" id="to-date" class="form-control form-select">
+                                            </div>
+                                        <div class="col-12 col-lg-6">
                                             <label for="event-type" class="form-label screen-only"
-                                                aria-label="Filter by Event Type">Event Type</label>
+                                                aria-label="Filter by Event Type">All Event Categories</label>
                                             <select id="event-type" class="form-select">
-                                                <option value="">Event Type</option>
+                                                <option value="">All Event Categories</option>
                                                 <option value="1">Event Type 1</option>
                                                 <option value="2">Event Type 2</option>
                                             </select>
                                         </div>
-                                        <div class="col-6 col-lg-3">
-                                            <label for="topic" class="form-label screen-only"
-                                                aria-label="Filter by Topics">Topics</label>
-                                            <select id="topic" class="form-select">
-                                                <option value="">Topics</option>
+                                        <div class="col-12 col-lg-6">
+                                            <label for="all-event-audiences" class="form-label screen-only"
+                                                aria-label="Filter by Topics">All Event Audiences</label>
+                                            <select id="all-event-audiences" class="form-select">
+                                                <option value="">All Event Audiences</option>
+                                                <option value="1">Event Audience 1</option>
+                                                <option value="2">Event Audience 2</option>
+                                                <option value="3">Event Audience 3</option>
+                                                <option value="4">Event Audience 4</option>
+                                                <option value="5">Event Audience 5</option>
+                                                <option value="6">Event Audience 6</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <label for="all-departments" class="form-label screen-only"
+                                                aria-label="Filter by Topics">All Departments</label>
+                                            <select id="all-departments" class="form-select">
+                                                <option value="">All Departments</option>
                                                 <option value="1">Topic 1</option>
                                                 <option value="2">Topic 2</option>
                                                 <option value="3">Topic 3</option>
@@ -532,24 +541,38 @@
                                                 <option value="6">Topic 6</option>
                                             </select>
                                         </div>
+                                        <div class="col-12 col-lg-6">
+                                            <label for="all-location-types" class="form-label screen-only"
+                                                aria-label="Filter by Topics">All Location Types</label>
+                                            <select id="all-location-types" class="form-select">
+                                                <option value="">All Location Types</option>
+                                                <option value="1">Topic 1</option>
+                                                <option value="2">Topic 2</option>
+                                                <option value="3">Topic 3</option>
+                                                <option value="4">Topic 4</option>
+                                                <option value="5">Topic 5</option>
+                                                <option value="6">Topic 6</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-lg-6 button-wrapper">
+                                            <button type="submit" class="btn btn-primary"><span>Apply Filters</span></button>
+                                            <button type="reset" class="btn btn-primary"><span>Reset</span></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-lg-3 button-wrapper">
-                                    <button class="btn btn-primary"><span>Apply Filters</span></button>
-                                    <button class="btn btn-primary"><span>Reset</span></button>
-                                </div>
+                                
 
                         </form>
                     </div>
                 </div>
 
                 <!-- Upcoming Events -->
-                <div class="row upcoming-events-wrapper">
+                <!-- <div class="row upcoming-events-wrapper">
                     <div class="col-12 upcomming-btn-wrapper">
                         <button class="btn upcomming-btn active">Upcoming</button>
                         <button class="btn trending-btn">trending</button>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Upcoming Events List -->
                 <div class="row upcoming-events-list-wrapper">
@@ -565,7 +588,7 @@
                                     </h3>
                                 </div>
                                 <div class="event-date-time">
-                                   <p>Sun, Feb 22, 2026</p>
+                                    <p>Sun, Feb 22, 2026</p>
                                 </div>
                                 <div class="event-footer">
                                     <p>Virtual Event</p>
@@ -585,7 +608,7 @@
                                     </h3>
                                 </div>
                                 <div class="event-date-time">
-                                   <p>Sun, Feb 22, 2026</p>
+                                    <p>Sun, Feb 22, 2026</p>
                                 </div>
                                 <div class="event-footer">
                                     <p>General Admission: $25; Student, Artist, Educator: $15</p>
@@ -605,7 +628,7 @@
                                     </h3>
                                 </div>
                                 <div class="event-date-time">
-                                   <p>Sun, Feb 22, 2026</p>
+                                    <p>Sun, Feb 22, 2026</p>
                                 </div>
                                 <div class="event-footer">
                                     <p>General Admission: $25; Student, Artist, Educator: $15</p>
@@ -625,7 +648,7 @@
                                     </h3>
                                 </div>
                                 <div class="event-date-time">
-                                   <p>Sun, Feb 22, 2026</p>
+                                    <p>Sun, Feb 22, 2026</p>
                                 </div>
                                 <div class="event-footer">
                                     <p>Virtual Event</p>
@@ -645,7 +668,7 @@
                                     </h3>
                                 </div>
                                 <div class="event-date-time">
-                                   <p>Sun, Feb 22, 2026</p>
+                                    <p>Sun, Feb 22, 2026</p>
                                 </div>
                                 <div class="event-footer">
                                     <p>General Admission: $25; Student, Artist, Educator: $15</p>
@@ -665,7 +688,7 @@
                                     </h3>
                                 </div>
                                 <div class="event-date-time">
-                                   <p>Sun, Feb 22, 2026</p>
+                                    <p>Sun, Feb 22, 2026</p>
                                 </div>
                                 <div class="event-footer">
                                     <p>General Admission: $25; Student, Artist, Educator: $15</p>
