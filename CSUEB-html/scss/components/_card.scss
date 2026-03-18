@@ -89,26 +89,32 @@
         transform: translateY(0);
         transition: all 0.4s ease-in-out;
 
+        @include media-breakpoint-up(md) {
+            &.hover-border-gold {
+                &:hover {
+                    border-color: var(--gold) !important;
+                }
+            }
+            &.hover-border-purple {
+                &:hover {
+                    border-color: var(--purple) !important;
+                }
+            }
+    
+            &.hover-border-teal {
+                &:hover {
+                    border-color: var(--teal) !important;
+                }
+            }
+        }
+
+        
+
         @include media-breakpoint-down(lg) {
             padding: rem.convert(24px 16px);
         }
 
-        &:hover {
-            border-color: var(--purple);
-            transform: translateY(-4px);
-        }
 
-        &:nth-child(2) {
-            &:hover {
-                border-color: var(--gold) !important;
-            }
-        }
-
-        &:nth-child(3) {
-            &:hover {
-                border-color: var(--teal) !important;
-            }
-        }
 
         .card-heading {
             h3 {
@@ -159,12 +165,15 @@
             var(--red);
         background-repeat: repeat;
         background-size: 28px;
+
         .section-heading {
             color: var(--white);
-            .section-title{
+
+            .section-title {
                 color: var(--white);
             }
         }
+
         .title-wrap {
             svg {
                 path {
@@ -172,13 +181,15 @@
                 }
             }
         }
-        .section-bg-overlay{
+
+        .section-bg-overlay {
             display: none;
         }
-        &::after{
+
+        &::after {
             display: none;
         }
-        
+
     }
 }
 
@@ -239,9 +250,31 @@
     padding: rem.convert(48px 32px);
     height: 100%;
     transition: all 0.3s ease-in-out;
-    @include media-breakpoint-up(lg) {
-        border: 8px solid transparent;
+    border: 8px solid transparent;
+
+    @include media-breakpoint-up(md) {
+        &.hover-border-gold {
+            &:hover {
+                border-color: var(--gold) !important;
+            }
+        }
+        &.hover-border-purple {
+            &:hover {
+                border-color: var(--purple) !important;
+            }
+        }
+
+        &.hover-border-teal {
+            &:hover {
+                border-color: var(--teal) !important;
+            }
+        }
     }
+
+    @include media-breakpoint-down(lg) {
+        padding: rem.convert(24px 16px);
+    }
+
 
     .counter-value {
         @extend .h2;
@@ -250,7 +283,7 @@
         font-size: rem.convert(48px);
         margin-bottom: rem.convert(8px);
 
-        @media-breakpoint-down(md) {
+        @include media-breakpoint-down(lg) {
             font-size: rem.convert(32px);
         }
     }
@@ -270,7 +303,8 @@
         gap: rem.convert(8px);
         text-align: center;
         align-items: center;
-        .btn{
+
+        .btn {
             color: var(--white);
         }
     }
@@ -296,5 +330,10 @@
 
     .counter-card:hover {
         transform: none;
+    }
+}
+.right-content{
+    .counter-card{
+        padding: rem.convert(32px 16px);
     }
 }

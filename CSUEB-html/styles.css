@@ -3371,6 +3371,10 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   cursor: not-allowed;
 }
 
+.bg-transparent {
+  background: transparent !important;
+}
+
 .bg-red {
   background: var(--red) !important;
   color: var(--white);
@@ -9038,20 +9042,21 @@ table:not(.gssb_c) {
   transform: translateY(0);
   transition: all 0.4s ease-in-out;
 }
+@media (min-width: 768px) {
+  .text-card-link-section .text-link-card.hover-border-gold:hover {
+    border-color: var(--gold) !important;
+  }
+  .text-card-link-section .text-link-card.hover-border-purple:hover {
+    border-color: var(--purple) !important;
+  }
+  .text-card-link-section .text-link-card.hover-border-teal:hover {
+    border-color: var(--teal) !important;
+  }
+}
 @media (max-width: 991.98px) {
   .text-card-link-section .text-link-card {
     padding: 1.5rem 1rem;
   }
-}
-.text-card-link-section .text-link-card:hover {
-  border-color: var(--purple);
-  transform: translateY(-4px);
-}
-.text-card-link-section .text-link-card:nth-child(2):hover {
-  border-color: var(--gold) !important;
-}
-.text-card-link-section .text-link-card:nth-child(3):hover {
-  border-color: var(--teal) !important;
 }
 .text-card-link-section .text-link-card .card-heading h3 {
   font-size: 1.5rem;
@@ -9146,10 +9151,22 @@ table:not(.gssb_c) {
   padding: 3rem 2rem;
   height: 100%;
   transition: all 0.3s ease-in-out;
+  border: 8px solid transparent;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
+  .counter-card.hover-border-gold:hover {
+    border-color: var(--gold) !important;
+  }
+  .counter-card.hover-border-purple:hover {
+    border-color: var(--purple) !important;
+  }
+  .counter-card.hover-border-teal:hover {
+    border-color: var(--teal) !important;
+  }
+}
+@media (max-width: 991.98px) {
   .counter-card {
-    border: 8px solid transparent;
+    padding: 1.5rem 1rem;
   }
 }
 .counter-card .counter-value {
@@ -9158,7 +9175,7 @@ table:not(.gssb_c) {
   font-size: 3rem;
   margin-bottom: 0.5rem;
 }
-@media-breakpoint-down (md) {
+@media (max-width: 991.98px) {
   .counter-card .counter-value {
     font-size: 2rem;
   }
@@ -9203,6 +9220,10 @@ table:not(.gssb_c) {
     transform: none;
   }
 }
+.right-content .counter-card {
+  padding: 2rem 1rem;
+}
+
 .event-calendar-section {
   padding: 3rem 0 6rem 0;
 }
