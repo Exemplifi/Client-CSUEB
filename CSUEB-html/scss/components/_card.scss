@@ -95,12 +95,13 @@
                     border-color: var(--gold) !important;
                 }
             }
+
             &.hover-border-purple {
                 &:hover {
                     border-color: var(--purple) !important;
                 }
             }
-    
+
             &.hover-border-teal {
                 &:hover {
                     border-color: var(--teal) !important;
@@ -108,7 +109,7 @@
             }
         }
 
-        
+
 
         @include media-breakpoint-down(lg) {
             padding: rem.convert(24px 16px);
@@ -258,6 +259,7 @@
                 border-color: var(--gold) !important;
             }
         }
+
         &.hover-border-purple {
             &:hover {
                 border-color: var(--purple) !important;
@@ -332,8 +334,27 @@
         transform: none;
     }
 }
-.right-content{
-    .counter-card{
+
+.right-content {
+    .text-card-link-section, .scroll-counter-section {
+        margin-bottom: rem.convert(64px);
+
+        @include media-breakpoint-down(md) {
+            margin-bottom: rem.convert(40px);
+        }
+        &::last-child{
+            margin-bottom: 0;
+        }
+        &:has(+ .bg-white){
+            margin-bottom: 0;
+        }
+        &.bg-white{
+            margin-bottom: 0;
+        }
+
+    }
+
+    .counter-card {
         padding: rem.convert(32px 16px);
     }
 }

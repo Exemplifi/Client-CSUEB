@@ -152,3 +152,14 @@
 .gssb_a {
 
 }
+.gsc-search-box {
+    .gsc-input[name="search"]{
+        padding-left: rem.convert(40px) !important;
+    }
+    #gs_st50{
+        text-align: right;
+    }
+    @include media-breakpoint-down(md){
+      margin: 0 !important;
+    }
+}

@@ -8967,6 +8967,18 @@ table:not(.gssb_c) {
   color: var(--black);
 }
 
+.gsc-search-box .gsc-input[name=search] {
+  padding-left: 2.5rem !important;
+}
+.gsc-search-box #gs_st50 {
+  text-align: right;
+}
+@media (max-width: 767.98px) {
+  .gsc-search-box {
+    margin: 0 !important;
+  }
+}
+
 .text-card-link-section {
   position: relative;
 }
@@ -9219,6 +9231,23 @@ table:not(.gssb_c) {
   .counter-card:hover {
     transform: none;
   }
+}
+.right-content .text-card-link-section, .right-content .scroll-counter-section {
+  margin-bottom: 4rem;
+}
+@media (max-width: 767.98px) {
+  .right-content .text-card-link-section, .right-content .scroll-counter-section {
+    margin-bottom: 2.5rem;
+  }
+}
+.right-content .text-card-link-section::last-child, .right-content .scroll-counter-section::last-child {
+  margin-bottom: 0;
+}
+.right-content .text-card-link-section:has(+ .bg-white), .right-content .scroll-counter-section:has(+ .bg-white) {
+  margin-bottom: 0;
+}
+.right-content .text-card-link-section.bg-white, .right-content .scroll-counter-section.bg-white {
+  margin-bottom: 0;
 }
 .right-content .counter-card {
   padding: 2rem 1rem;
