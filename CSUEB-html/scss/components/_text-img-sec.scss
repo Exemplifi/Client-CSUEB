@@ -1567,7 +1567,7 @@
                 height: 1.5rem;
               }
 
-              &[aria-expanded="false"] {
+              &[aria-expanded="true"] {
                 &::after {
                   content: "";
                   transform: rotate(-180deg);

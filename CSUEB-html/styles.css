@@ -6206,7 +6206,7 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
     width: 1.5rem;
     height: 1.5rem;
   }
-  .side-nav-with-content .side-nav-wrap .left-nav-wrap .left-nav .accordion-item .accordion-button[aria-expanded=false]::after {
+  .side-nav-with-content .side-nav-wrap .left-nav-wrap .left-nav .accordion-item .accordion-button[aria-expanded=true]::after {
     content: "";
     transform: rotate(-180deg);
   }
