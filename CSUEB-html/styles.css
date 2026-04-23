@@ -9349,6 +9349,15 @@ table:not(.gssb_c) {
   gap: 1rem;
   flex: 1;
 }
+.event-calendar-section .upcoming-event-card .content-wrap .heading-wrap a:not(.btn) {
+  text-decoration-color: transparent;
+  text-decoration-thickness: auto;
+  text-underline-offset: 4px;
+  transition: all 0.3s ease-in-out;
+}
+.event-calendar-section .upcoming-event-card .content-wrap .heading-wrap a:not(.btn):hover {
+  text-decoration-color: inherit;
+}
 .event-calendar-section .upcoming-event-card .content-wrap .event-date-time p {
   font-size: 0.875rem;
   font-weight: 500;
@@ -9468,6 +9477,11 @@ table:not(.gssb_c) {
   width: 273px;
   padding-left: 32px;
 }
+@media (max-width: 991.98px) {
+  .event-calendar-filter-form input[type=date] {
+    width: 100%;
+  }
+}
 .event-calendar-filter-form input[type=date]::-webkit-calendar-picker-indicator {
   opacity: 1;
   position: absolute;
@@ -9481,9 +9495,16 @@ table:not(.gssb_c) {
 .event-calendar-filter-form .button-wrapper {
   display: flex;
   gap: 12px;
+  align-items: flex-end;
+}
+@media (max-width: 767.98px) {
+  .event-calendar-filter-form .button-wrapper {
+    margin-top: 0.75rem;
+  }
 }
 .event-calendar-filter-form .button-wrapper .btn {
   flex: 1;
+  height: fit-content;
 }
 
 .event-calendar-details-section {
@@ -9616,6 +9637,19 @@ table:not(.gssb_c) {
 }
 .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item p:last-child {
   margin-bottom: 0;
+}
+
+.right-content .event-calendar-section {
+  padding: 0;
+}
+.right-content .event-calendar-section .container-smaller {
+  max-width: 100%;
+}
+.right-content .input-wrapper {
+  max-width: 100%;
+}
+.right-content .upcoming-events-list-wrapper {
+  max-width: 100%;
 }
 
 /*# sourceMappingURL=styles.css.map */

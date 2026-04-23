@@ -100,7 +100,16 @@
             flex: 1;
 
             .heading-wrap {
-                h3 {}
+                a:not(.btn){
+                    text-decoration-color: transparent;
+                    text-decoration-thickness: auto;
+                    text-underline-offset: 4px;
+                    transition: all 0.3s ease-in-out;
+                }
+                a:not(.btn):hover {
+                    text-decoration-color: inherit;
+                }
+           
             }
 
             .event-date-time {
@@ -240,6 +249,9 @@
         position: relative;
         width: 273px;
         padding-left: 32px;
+        @include media-breakpoint-down(lg) {
+            width: 100%;
+        }
     }
     input[type="date"]::-webkit-calendar-picker-indicator {
         opacity: 1;
@@ -255,9 +267,14 @@
     .button-wrapper {
         display: flex;
         gap: 12px;
+        align-items: flex-end;
+        @include media-breakpoint-down(md) {
+            margin-top: rem.convert(12px);
+        }
 
         .btn {
             flex: 1;
+            height: fit-content;
         }
     }
 }
@@ -415,5 +432,19 @@
                 }
             }
         }
+    }
+}
+.right-content{
+    .event-calendar-section{
+        padding: 0;
+        .container-smaller{
+            max-width: 100%;
+        }
+    }
+    .input-wrapper{
+        max-width: 100%;
+    }
+    .upcoming-events-list-wrapper {
+        max-width: 100%;
     }
 }
