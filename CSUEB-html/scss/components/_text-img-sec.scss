@@ -1580,6 +1580,9 @@
     }
 
     .right-content {
+      flex: 1;
+      overflow: hidden;
+      width: 100%;
       @include media-breakpoint-up(md) {
         flex: 1;
         overflow: hidden;
@@ -1589,9 +1592,7 @@
         padding-left: rem.convert(4px);
       }
 
-      flex: 1;
-      overflow: hidden;
-      width: 100%;
+      
 
       .text-button-sec {
         //padding-right: 4rem;

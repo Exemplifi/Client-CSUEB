@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMainImgSlider();
   initGalleryLightbox();
   initAccessibilityFeatures();
-
+  initFlatpickrDateInputs();
 
   const submenuItems = document.querySelectorAll('.leftnav .sidenav .drop:not(.active) .sidenav-sub');
   submenuItems.forEach(submenuItem => {
@@ -986,6 +986,7 @@ function initGalleryLightbox() {
     youtubePlayers = [];
   });
 }
+
 
 
 // Accessibility Features

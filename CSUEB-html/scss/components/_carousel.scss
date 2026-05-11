@@ -683,7 +683,7 @@
     .swiper-btn {
       outline-color: var(--black);
       &.swiper-button-disabled {
-        opacity: 0.6;
+        opacity: 1;
         pointer-events: unset;
         cursor: not-allowed;
       }
