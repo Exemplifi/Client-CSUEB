@@ -525,6 +525,7 @@
 
         .section-title {
           margin-bottom: rem.convert(32px);
+          @extend .h3;
 
           @include media-breakpoint-down(md) {
             margin-bottom: rem.convert(24px);

@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initMainImgSlider();
   initGalleryLightbox();
   initAccessibilityFeatures();
-  initFlatpickrDateInputs();
+  initVideoPlayPause();
+  initScrollCounters();
 
   const submenuItems = document.querySelectorAll('.leftnav .sidenav .drop:not(.active) .sidenav-sub');
   submenuItems.forEach(submenuItem => {
@@ -989,6 +990,112 @@ function initGalleryLightbox() {
 
 
 
+function announceToScreenReader(message) {
+  const announcement = document.createElement('div');
+  announcement.setAttribute('aria-live', 'polite');
+  announcement.setAttribute('aria-atomic', 'true');
+  announcement.className = 'sr-only';
+  announcement.textContent = message;
+  document.body.appendChild(announcement);
+
+  setTimeout(() => {
+    announcement.remove();
+  }, 1000);
+}
+
+function initVideoPlayPause() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.video-wrap').forEach((wrap, index) => {
+    const video = wrap.querySelector('video');
+    const btn = wrap.querySelector('button.play-btn');
+    if (!video || !btn) return;
+
+    const videoLabel = video.getAttribute('aria-label') || 'Video';
+    const showControls = () => wrap.classList.add('show-controls');
+    const hideControls = () => wrap.classList.remove('show-controls');
+
+    if (!video.id) {
+      video.id = `video-player-${index + 1}`;
+    }
+
+    wrap.setAttribute('role', 'region');
+    wrap.setAttribute('aria-label', `${videoLabel} player`);
+
+    btn.setAttribute('aria-controls', video.id);
+
+    const updateButton = (announce = false) => {
+      const isPlaying = !video.paused && !video.ended;
+      const actionLabel = isPlaying ? 'Pause' : 'Play';
+      const enterHint = isPlaying
+        ? 'Press Enter to pause video'
+        : 'Press Enter to play video';
+
+      wrap.classList.toggle('is-playing', isPlaying);
+      btn.setAttribute('aria-label', `${actionLabel} ${videoLabel}. ${enterHint}`);
+      btn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+
+      if (announce) {
+        const statusMessage = isPlaying
+          ? `${videoLabel} is now playing.`
+          : `${videoLabel} is now paused.`;
+        announceToScreenReader(statusMessage);
+      }
+    };
+
+    const togglePlayback = (announce = true) => {
+      if (video.paused || video.ended) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+      updateButton(announce);
+    };
+
+    if (prefersReducedMotion) {
+      video.removeAttribute('autoplay');
+      video.pause();
+    }
+
+    wrap.addEventListener('mouseenter', showControls);
+    wrap.addEventListener('mouseleave', hideControls);
+
+    btn.addEventListener('focus', showControls);
+    btn.addEventListener('blur', () => {
+      if (!wrap.matches(':hover')) {
+        hideControls();
+      }
+    });
+
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        togglePlayback();
+      }
+    });
+
+    updateButton(false);
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      togglePlayback();
+
+      if (e.pointerType === 'mouse') {
+        btn.blur();
+        if (!wrap.matches(':hover')) {
+          hideControls();
+        }
+      }
+    });
+
+    video.addEventListener('play', () => updateButton(false));
+    video.addEventListener('pause', () => updateButton(false));
+    video.addEventListener('ended', () => updateButton(false));
+    video.addEventListener('loadeddata', () => updateButton(false));
+  });
+}
+
 // Accessibility Features
 function initAccessibilityFeatures() {
   // Skip link functionality
@@ -1015,19 +1122,7 @@ function initAccessibilityFeatures() {
     });
   });
 
-  // Announce dynamic content changes
-  function announceToScreenReader(message) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'sr-only';
-    announcement.textContent = message;
-    document.body.appendChild(announcement);
-
-    setTimeout(() => {
-      document.body.removeChild(announcement);
-    }, 1000);
-  }
+  // Announce dynamic content changes (uses shared announceToScreenReader)
 
   // Enhanced form validation
   const forms = document.querySelectorAll('form');
@@ -1500,6 +1595,281 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
 });
 
 
+
+// Scroll counter cards — values/labels come from CMS data-* attrs; SR text is built in JS
+function initScrollCounters(root = document) {
+  const scope = root && root.querySelectorAll ? root : document;
+  const counterElements = scope.querySelectorAll
+    ? scope.querySelectorAll('.counter-value:not([data-counter-init])')
+    : [];
+
+  if (!counterElements.length) return;
+
+  // Spoken forms for common symbols; any other value can use data-a11y-prefix / data-a11y-suffix from CMS
+  const SYMBOL_SPEAK = {
+    '%': 'percent',
+    '+': 'plus',
+    '-': 'minus',
+    '−': 'minus',
+    '±': 'plus or minus',
+    '×': 'times',
+    '÷': 'divided by',
+    '#': 'number',
+    '°': 'degrees',
+    '*': 'star',
+    '/': 'per',
+    ':': 'to',
+    '&': 'and',
+    $: 'dollars',
+    '€': 'euros',
+    '£': 'pounds',
+    '¥': 'yen',
+    '₹': 'rupees',
+    k: 'thousand',
+    K: 'thousand',
+    m: 'million',
+    M: 'million',
+    b: 'billion',
+    B: 'billion',
+  };
+  const COUNTER_DATA_ATTRS = [
+    'data-target',
+    'data-prefix',
+    'data-suffix',
+    'data-a11y-value',
+    'data-a11y-prefix',
+    'data-a11y-suffix',
+  ];
+
+  const getAttr = (el, name) => {
+    const value = el.getAttribute(name);
+    return value == null ? '' : value.trim();
+  };
+
+  const speakSymbol = (raw) => {
+    if (!raw) return '';
+
+    if (Object.prototype.hasOwnProperty.call(SYMBOL_SPEAK, raw)) {
+      return SYMBOL_SPEAK[raw];
+    }
+
+    // Letter/word affixes from CMS (e.g. "K", "hrs", "students")
+    if (/^[a-zA-Z][a-zA-Z0-9\s.'-]*$/.test(raw)) {
+      return raw;
+    }
+
+    // Multi-character symbols (e.g. "K+", "/mo") — read as provided; CMS can set data-a11y-suffix to refine
+    if (raw.length > 1) {
+      return raw;
+    }
+
+    // Unknown single character — omit from speech to avoid "plus sign", "number sign", etc.
+    return '';
+  };
+
+  const getSpokenAffix = (el, kind) => {
+    const a11yAttr = kind === 'prefix' ? 'data-a11y-prefix' : 'data-a11y-suffix';
+    const dataAttr = kind === 'prefix' ? 'data-prefix' : 'data-suffix';
+    const a11yText = getAttr(el, a11yAttr);
+    if (a11yText) return a11yText;
+
+    const raw = getAttr(el, dataAttr);
+    if (!raw) return '';
+
+    const spoken = speakSymbol(raw);
+    if (!spoken) return '';
+
+    return kind === 'prefix' ? `${spoken} ` : ` ${spoken}`;
+  };
+
+  const parseCounterConfig = (rawTarget) => {
+    const raw = (rawTarget || '0').trim();
+    let target;
+    let formatNum;
+
+    if (/\D/.test(raw)) {
+      const commaIdx = raw.indexOf(',');
+      const hasComma = commaIdx !== -1;
+      const afterComma = hasComma ? raw.slice(commaIdx + 1) : '';
+      const isDecimalComma = hasComma && /^\d{1,2}$/.test(afterComma) && !raw.includes('.');
+
+      if (isDecimalComma) {
+        const parts = raw.split(',');
+        const intPart = (parts[0].replace(/\s/g, '') || '0').replace(/\D/g, '') || '0';
+        const decPart = (parts[1] || '0').replace(/\D/g, '') || '0';
+        const decPlaces = decPart.length;
+        target = parseFloat(`${intPart}.${decPart}`) || 0;
+        formatNum = (n) => {
+          const i = Math.floor(n);
+          const d = (n - i).toFixed(decPlaces).slice(2).padEnd(decPlaces, '0');
+          return decPlaces ? `${i}.${d}` : String(i);
+        };
+      } else {
+        target = parseInt(raw.replace(/\D/g, ''), 10) || 0;
+        const segmentLengths = raw.split(',').map((p) => p.replace(/\D/g, '').length);
+        formatNum = (n) => {
+          const s = Math.round(n).toString();
+          if (segmentLengths.length <= 1 || s.length === 0) return s;
+          let out = '';
+          let idx = 0;
+          for (let i = 0; i < segmentLengths.length && idx < s.length; i++) {
+            if (i > 0) out += ',';
+            const len = segmentLengths[i];
+            out += s.slice(idx, idx + len);
+            idx += len;
+          }
+          if (idx < s.length) out += s.slice(idx);
+          return out || s;
+        };
+      }
+    } else {
+      target = parseInt(raw, 10) || 0;
+      formatNum = (n) => String(Math.round(n));
+    }
+
+    return { target, formatNum };
+  };
+
+  // Visual counters keep locale commas; screen readers must not hear "comma" per separator
+  const formatAccessibleDigits = (n) => {
+    if (!Number.isFinite(n)) return '0';
+    return new Intl.NumberFormat('en-US', {
+      useGrouping: false,
+      maximumFractionDigits: 20,
+    }).format(n);
+  };
+
+  const buildAccessibleValue = (el, target) => {
+    const custom = getAttr(el, 'data-a11y-value');
+    if (custom) return custom;
+
+    const formatted = formatAccessibleDigits(target);
+    const prefixText = getSpokenAffix(el, 'prefix');
+    const suffixText = getSpokenAffix(el, 'suffix');
+
+    return `${prefixText}${formatted}${suffixText}`.replace(/\s+/g, ' ').trim();
+  };
+
+  const getCounterConfig = (el) => {
+    const rawTarget = getAttr(el, 'data-target') || '0';
+    const config = parseCounterConfig(rawTarget);
+    const accessibleValue = buildAccessibleValue(el, config.target);
+    return { ...config, accessibleValue };
+  };
+
+  const updateAccessibleValue = (el) => {
+    const { accessibleValue } = getCounterConfig(el);
+    const srEl = ensureSrValueEl(el);
+    if (srEl) {
+      srEl.textContent = accessibleValue;
+    }
+  };
+
+  const ensureSrValueEl = (visualEl) => {
+    const inner = visualEl.closest('.counter-card-inner');
+    if (!inner) return null;
+
+    let srEl = inner.querySelector('.counter-sr-value');
+    if (!srEl) {
+      srEl = document.createElement('p');
+      srEl.className = 'screen-only counter-sr-value';
+      const label = inner.querySelector('.counter-label');
+      if (label) {
+        inner.insertBefore(srEl, label);
+      } else {
+        visualEl.insertAdjacentElement('afterend', srEl);
+      }
+    }
+    return srEl;
+  };
+
+  const animateCounter = (el, config, accessibleValue) => {
+    const { target, formatNum } = config;
+    const prefix = getAttr(el, 'data-prefix');
+    const suffix = getAttr(el, 'data-suffix');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const srEl = ensureSrValueEl(el);
+
+    el.setAttribute('aria-hidden', 'true');
+
+    if (srEl) {
+      srEl.textContent = accessibleValue;
+    }
+
+    if (prefersReducedMotion) {
+      el.textContent = prefix + formatNum(target) + suffix;
+      return;
+    }
+
+    const duration = 4000;
+    const startTime = performance.now();
+
+    const updateCounter = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 2);
+      const current = easeOut * target;
+      el.textContent = prefix + formatNum(current) + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        el.textContent = prefix + formatNum(target) + suffix;
+      }
+    };
+
+    requestAnimationFrame(updateCounter);
+  };
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3,
+  };
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      const el = entry.target;
+      if (el.dataset.animated) return;
+
+      el.dataset.animated = 'true';
+      const config = getCounterConfig(el);
+      animateCounter(el, config, config.accessibleValue);
+      counterObserver.unobserve(el);
+    });
+  }, observerOptions);
+
+  counterElements.forEach((el) => {
+    el.setAttribute('aria-hidden', 'true');
+    el.dataset.counterInit = 'true';
+    updateAccessibleValue(el);
+    counterObserver.observe(el);
+
+    const dataObserver = new MutationObserver(() => {
+      const config = getCounterConfig(el);
+      updateAccessibleValue(el);
+
+      if (el.dataset.animated) {
+        const prefix = getAttr(el, 'data-prefix');
+        const suffix = getAttr(el, 'data-suffix');
+        el.textContent = prefix + config.formatNum(config.target) + suffix;
+        return;
+      }
+
+      counterObserver.observe(el);
+    });
+
+    dataObserver.observe(el, {
+      attributes: true,
+      attributeFilter: COUNTER_DATA_ATTRS,
+    });
+  });
+}
+
+// Re-run after CMS/AJAX injects counter markup (e.g. CSUEB.refreshScrollCounters(container))
+window.CSUEB = window.CSUEB || {};
+window.CSUEB.refreshScrollCounters = initScrollCounters;
 
 // Flip Tiles Gallery
 

@@ -92,6 +92,7 @@ h2,
 .counter-card .counter-value,
 h3,
 .h3,
+.testimonial-sec .next-card .section-heading .title-wrap .section-title,
 h4,
 .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item h3,
 .h4,
@@ -135,7 +136,7 @@ h2, .h2, .counter-card .counter-value {
   }
 }
 
-h3, .h3 {
+h3, .h3, .testimonial-sec .next-card .section-heading .title-wrap .section-title {
   font-family: var(--body-font-family);
   font-size: 1.75rem;
   font-style: normal;
@@ -144,13 +145,13 @@ h3, .h3 {
   letter-spacing: -0.05625rem;
 }
 @media (max-width: 1199.98px) {
-  h3, .h3 {
+  h3, .h3, .testimonial-sec .next-card .section-heading .title-wrap .section-title {
     font-size: 1.375rem;
     line-height: 1.4; /* 1.575rem */
   }
 }
 @media (max-width: 991.98px) {
-  h3, .h3 {
+  h3, .h3, .testimonial-sec .next-card .section-heading .title-wrap .section-title {
     font-size: 1.25rem;
     line-height: 1.2; /* 2.55rem */
     letter-spacing: normal;
@@ -669,7 +670,7 @@ section.bg-white.section-with-padding + section.bg-white {
   color: #747474;
 }
 .breadcrumb .breadcrumb-item a {
-  color: rgba(0, 0, 0, 0.61);
+  color: #555555;
   text-decoration: underline;
 }
 .breadcrumb .breadcrumb-item a:hover {
@@ -2952,7 +2953,7 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   bottom: 10%;
   background: rgba(0, 0, 0, 0.0392156863);
 }
-.bright-future-swiper .slide-card.slide-card .slide-text .h3 {
+.bright-future-swiper .slide-card.slide-card .slide-text .h3, .bright-future-swiper .slide-card.slide-card .slide-text .testimonial-sec .next-card .section-heading .title-wrap .section-title, .testimonial-sec .next-card .section-heading .title-wrap .bright-future-swiper .slide-card.slide-card .slide-text .section-title {
   font-family: var(--body-font-family);
 }
 .bright-future-swiper .slide-card.slide-card .slide-text p {
@@ -5840,6 +5841,15 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
     object-fit: cover;
   }
 }
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap {
+  position: relative;
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap .ratio video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
 .full-img-text-sec .img-full-sec .img-wrapper .video-wrap .play-btn {
   background: rgba(0, 0, 0, 0.7);
   border: none;
@@ -5852,16 +5862,51 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
-  transition: background 0.4s;
+  transition: opacity 0.25s ease, background 0.4s;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  cursor: pointer;
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap .play-btn:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
 }
 .full-img-text-sec .img-full-sec .img-wrapper .video-wrap .play-btn svg path {
   fill: var(--white);
 }
-.full-img-text-sec .img-full-sec .img-wrapper .video-wrap:hover .play-btn {
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap .play-btn .pause-icon {
+  display: none;
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap.is-playing.show-controls .play-btn, .full-img-text-sec .img-full-sec .img-wrapper .video-wrap.is-playing .play-btn:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  background: rgb(0, 0, 0);
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap.is-playing.show-controls .play-btn .play-icon, .full-img-text-sec .img-full-sec .img-wrapper .video-wrap.is-playing .play-btn:focus-visible .play-icon {
+  display: none;
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap.is-playing.show-controls .play-btn .pause-icon, .full-img-text-sec .img-full-sec .img-wrapper .video-wrap.is-playing .play-btn:focus-visible .pause-icon {
+  display: flex;
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap:not(.is-playing) .play-btn {
+  opacity: 1;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.7);
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap:not(.is-playing) .play-btn .play-icon {
+  display: flex;
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap:not(.is-playing) .play-btn .pause-icon {
+  display: none;
+}
+.full-img-text-sec .img-full-sec .img-wrapper .video-wrap:not(.is-playing) .play-btn:hover {
   background: rgb(0, 0, 0);
 }
 .full-img-text-sec.overlaping-top-sec .img-full-sec::before {
@@ -6840,6 +6885,61 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   .main-img-slider .swiper-slide .img-wrapper {
     width: 100%;
   }
+}
+
+.video-wrap:has(> button.play-btn) {
+  position: relative;
+}
+.video-wrap:has(> button.play-btn) .ratio video,
+.video-wrap:has(> button.play-btn) > video {
+  pointer-events: none;
+}
+.video-wrap:has(> button.play-btn) > button.play-btn {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.video-wrap:has(> button.play-btn) > button.play-btn .play-icon,
+.video-wrap:has(> button.play-btn) > button.play-btn .pause-icon {
+  display: none;
+}
+.video-wrap:has(> button.play-btn) > button.play-btn:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+}
+.video-wrap:has(> button.play-btn).is-playing > button.play-btn:focus-visible .play-icon {
+  display: none;
+}
+.video-wrap:has(> button.play-btn).is-playing > button.play-btn:focus-visible .pause-icon {
+  display: flex;
+}
+.video-wrap:has(> button.play-btn):not(.is-playing) > button.play-btn:focus-visible .play-icon {
+  display: flex;
+}
+.video-wrap:has(> button.play-btn):not(.is-playing) > button.play-btn:focus-visible .pause-icon {
+  display: none;
+}
+.video-wrap:has(> button.play-btn).is-playing.show-controls > button.play-btn, .video-wrap:has(> button.play-btn).is-playing > button.play-btn:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.video-wrap:has(> button.play-btn).is-playing.show-controls > button.play-btn .play-icon, .video-wrap:has(> button.play-btn).is-playing > button.play-btn:focus-visible .play-icon {
+  display: none;
+}
+.video-wrap:has(> button.play-btn).is-playing.show-controls > button.play-btn .pause-icon, .video-wrap:has(> button.play-btn).is-playing > button.play-btn:focus-visible .pause-icon {
+  display: flex;
+}
+.video-wrap:has(> button.play-btn):not(.is-playing) > button.play-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+.video-wrap:has(> button.play-btn):not(.is-playing) > button.play-btn .play-icon {
+  display: flex;
+}
+.video-wrap:has(> button.play-btn):not(.is-playing) > button.play-btn .pause-icon {
+  display: none;
 }
 
 .home-hero-sec {
@@ -9199,6 +9299,14 @@ table:not(.gssb_c) {
   line-height: 1.75;
   text-align: center;
 }
+.counter-card .counter-description {
+  font-size: 1rem;
+  color: var(--white);
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  margin-top: 0.25rem;
+}
 .counter-card .button-grp {
   margin-top: 1rem;
   display: flex;
@@ -9222,6 +9330,9 @@ table:not(.gssb_c) {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+.counter-card-inner p {
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
