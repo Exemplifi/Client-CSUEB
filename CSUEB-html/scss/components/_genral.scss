@@ -504,7 +504,7 @@ section.bg-white.section-with-padding+section.bg-white {
 
         &:hover {
             color: var(--red);
-            background-color: rgba(213, 0, 50, 0.1);
+            background-color: #FAE5EA;
         }
     }
 
@@ -539,6 +539,11 @@ section.bg-white.section-with-padding+section.bg-white {
 
                 &.active {
                     color: var(--red);
+                }
+                &.star-btn-link{
+                    &:hover {
+                        background-color: #FAE5EA;
+                    }
                 }
             }
         }
