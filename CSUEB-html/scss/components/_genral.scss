@@ -552,13 +552,33 @@ section.bg-white.section-with-padding+section.bg-white {
             margin: rem.convert(0 0 12px 0);
         }
     }
+   
+   
 }
 
 .sidenav {
     padding-left: 0;
     padding-right: 0;
 }
-
+.accordion-header-link{
+    font-size: rem.convert(16px);
+    font-weight: 500;
+    line-height: 1.75;
+    color: var(--black);
+    font-family: var(--body-font-family);
+    transition: all 0.3s ease-in-out;
+    text-underline-offset: rem.convert(2px);
+    margin-right: rem.convert(8px);
+    @include media-breakpoint-up(xl) {
+        padding: 0 rem.convert(4px);
+    }
+    &:hover {
+        color: var(--red);
+        text-decoration-color: transparent;
+        background-color: #FAE5EA;
+       
+    }
+}
 .btn.btn-expander {
     background: none;
     box-shadow: none;

@@ -511,10 +511,13 @@
             <div class="left-nav">
               <div class="accordion-item bg-transparent border-none">
                 <h2 class="accordion-header bg-transparent mb-2" id="thissection-accordion">
-                  <button class="accordion-button collapsed text-subtext bg-transparent p-0" type="button"
+                  <a href="/sample-page" class="accordion-header-link">
+                    In this section
+                  </a>
+                  <button class="accordion-button collapsed text-subtext bg-transparent p-0 d-xl-none" type="button"
                     data-bs-toggle="collapse" data-bs-target="#thissection" aria-expanded="true"
                     aria-controls="thissection">
-                    In this section
+                    <span class="sr-only">click here to expand the navigation</span>
                   </button>
                 </h2>
                 <div id="thissection" class="accordion-collapse collapse show" aria-labelledby="thissection-accordion"
