@@ -8104,6 +8104,10 @@ body:has(.home-hero-sec) .main-header > .container {
   text-decoration: underline;
 }
 
+.faculty-accordion .accordion-body ul li span {
+  display: inline;
+}
+
 .flip-tiles-section {
   position: relative;
 }
