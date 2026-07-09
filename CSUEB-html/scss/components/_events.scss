@@ -250,9 +250,8 @@
         @include media-breakpoint-down(lg) {
             width: 100%;
         }
-        
     }
-    .input{
+    .input {
         background-image: url("data:image/svg+xml,%3Csvg width='21' height='21' viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 1.75V5.25' stroke='black' stroke-width='1.67' stroke-linecap='round'/%3E%3Cpath d='M14 1.75V5.25' stroke='black' stroke-width='1.67' stroke-linecap='round'/%3E%3Cpath d='M16.625 3.5H4.375C3.4085 3.5 2.625 4.2835 2.625 5.25V17.5C2.625 18.4665 3.4085 19.25 4.375 19.25H16.625C17.5915 19.25 18.375 18.4665 18.375 17.5V5.25C18.375 4.2835 17.5915 3.5 16.625 3.5Z' stroke='black' stroke-width='1.67'/%3E%3Cpath d='M2.625 8.75H18.375' stroke='black' stroke-width='1.67'/%3E%3C/svg%3E");
         background-size: rem.convert(21px);
         background-repeat: no-repeat;
@@ -334,36 +333,36 @@
                     }
                 }
             }
-            ol{
+            ol {
                 padding-left: rem.convert(16px);
                 margin-top: rem.convert(16px);
-                li{
+                li {
                     margin-bottom: rem.convert(4px);
                     &:last-child {
                         margin-bottom: 0;
                     }
                 }
-                ol{
+                ol {
                     padding-left: rem.convert(16px);
                     margin-top: rem.convert(16px);
-                    li{
+                    li {
                         margin-bottom: rem.convert(4px);
                     }
                 }
             }
         }
-        iframe{
+        iframe {
             margin-top: rem.convert(24px);
             width: 100%;
             height: auto;
             aspect-ratio: 16 / 9 !important;
         }
-        img{
+        img {
             margin-top: rem.convert(24px);
             width: 100%;
             height: auto;
         }
-        video{
+        video {
             margin-top: rem.convert(24px);
             width: 100%;
             height: auto;
@@ -482,6 +481,10 @@
                     margin-bottom: 0;
                 }
 
+                &[hidden] {
+                    display: none !important;
+                }
+
                 h3 {
                     @extend h4;
                     margin-bottom: rem.convert(16px);
@@ -512,37 +515,71 @@
                         text-decoration-color: transparent;
                     }
                 }
-                ul{
+                ul {
                     list-style: disc;
                     padding-left: rem.convert(16px);
                     margin-top: rem.convert(16px);
-                    li{
+                    li {
                         margin-bottom: rem.convert(4px);
                     }
                 }
-                ol{
+                ol {
                     padding-left: rem.convert(16px);
                     margin-top: rem.convert(16px);
-                    li{
+                    li {
                         margin-bottom: rem.convert(4px);
                     }
                 }
-                img{
+                img {
                     margin-top: rem.convert(24px);
                     width: 100%;
                     height: auto;
                 }
-                video{
+                video {
                     margin-top: rem.convert(24px);
                     width: 100%;
                     height: auto;
                     aspect-ratio: 16 / 9 !important;
                 }
-                iframe{
+                iframe {
                     margin-top: rem.convert(24px);
                     width: 100%;
                     height: auto;
                     aspect-ratio: 16 / 9 !important;
+                }
+            }
+
+            .event-details-more-wrap {
+                margin-top: 0;
+
+                @include media-breakpoint-down(md) {
+                    margin-top: rem.convert(24px);
+                }
+
+                &[hidden] {
+                    display: none;
+                }
+                .event-details-more-btn {
+                    width: max-content;
+                    display: inline-flex;
+                    align-items: center;
+                    padding: rem.convert(8px 8px 8px 4px);
+                    font-size: 0.875rem;
+                    line-height: 1.75;
+                    gap: 0;
+                    .icon-wrap {
+                        margin-right: rem.convert(4px);
+                        flex: 0 0 rem.convert(24px);
+                        svg {
+                            transition: all 0.3s ease-in-out;
+                        }
+                    }
+                    &[aria-expanded="true"] {
+                        margin-top: rem.convert(24px);
+                        .icon-wrap svg {
+                            transform: rotate(180deg);
+                        }
+                    }
                 }
             }
         }
