@@ -315,6 +315,11 @@
       box-sizing: border-box;
       &:focus-visible {
         border: 4px solid var(--red);
+        .slider-heading{
+          outline: 4px solid var(--white);
+          border-radius: rem.convert(4px);
+          outline-offset: rem.convert(4px);
+        }
       }
 
       @media (min-width: 1660px) {
