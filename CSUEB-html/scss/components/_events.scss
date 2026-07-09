@@ -564,7 +564,7 @@
                     display: inline-flex;
                     align-items: center;
                     padding: rem.convert(8px 8px 8px 4px);
-                    font-size: 0.875rem;
+                    font-size: rem.convert(14px);
                     line-height: 1.75;
                     gap: 0;
                     .icon-wrap {
