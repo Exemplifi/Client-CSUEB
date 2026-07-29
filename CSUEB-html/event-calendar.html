@@ -440,7 +440,7 @@
         </section>
         <!-- Inner Hero Section End -->
 
-        <section class="event-calendar-section">
+        <!-- <section class="event-calendar-section">
 
             <div class="container-smaller">
                 <div class="row">
@@ -470,18 +470,19 @@
                                 <div class="col-12 input-wrapper mx-auto">
                                     <div class="row">
                                         <div class="col-12">
+                                            <label for="search" class="screen-only">Search events</label>
                                             <input class="form-control" id="search" placeholder="Search events..."
                                                 type="search">
                                         </div>
                                         <div class="col-12 col-lg-3">
                                             <label>From</label>
-                                            <input class="form-control" type="date" data-date=""
-                                                data-date-format="MM/DD/YYYY">
+                                            <input class="form-control" type="text" data-date=""
+                                                data-date-format="MM/DD/YYYY" placeholder="MM/DD/YYYY" autocomplete="off">
                                         </div>
                                         <div class="col-12 col-lg-3">
                                             <label>To</label>
-                                            <input class="form-control" id="to-date" type="date" data-date=""
-                                                data-date-format="MM/DD/YYYY">
+                                            <input class="form-control" type="text" data-date=""
+                                                data-date-format="MM/DD/YYYY" placeholder="MM/DD/YYYY" autocomplete="off">
                                         </div>
                                         <div class="col-12 col-lg-6">
                                             <label>Category</label>
@@ -807,7 +808,7 @@
                 </div>
 
             </div>
-        </section>
+        </section> -->
 
 
         <!-- breadcrumb -->
@@ -862,23 +863,28 @@
                                 <div class="col-12 input-wrapper mx-auto">
                                     <div class="row">
                                         <div class="col-12">
-                                            <label for="search" class="form-label screen-only"
-                                                aria-label="Search">Search</label>
+                                            <label for="search" class="form-label screen-only">Search events</label>
                                             <input type="search" id="search" class="form-control" placeholder="Search">
                                         </div>
                                         <div class="col-12 col-lg-3">
-                                            <label for="from-date" class="form-label screen-only"
-                                                aria-label="Filter by From Date">From</label>
-                                            <input type="date" id="from-date" class="form-control form-select">
+                                            <label for="from-date" class="form-label">Select From Date</label>
+                                            <input type="text" id="from-date" class="form-control form-select"
+                                                placeholder="MM/DD/YYYY" data-date-format="MM/DD/YYYY"
+                                                autocomplete="off" aria-describedby="date-picker-hint">
                                         </div>
                                         <div class="col-12 col-lg-3">
-                                            <label for="to-date" class="form-label screen-only"
-                                                aria-label="Filter by To Date">To</label>
-                                            <input type="date" id="to-date" class="form-control form-select">
+                                            <label for="to-date" class="form-label">Select To Date</label>
+                                            <input type="text" id="to-date" class="form-control form-select"
+                                                placeholder="MM/DD/YYYY" data-date-format="MM/DD/YYYY"
+                                                autocomplete="off" aria-describedby="date-picker-hint">
                                         </div>
+                                        <p id="date-picker-hint" class="screen-only">
+                                            Press Arrow Down to open the calendar, then use arrow keys
+                                            to move between days. Press Page Up or Page Down to change months, Enter to
+                                            select a date, and Escape to close.
+                                        </p>
                                         <div class="col-12 col-lg-6">
-                                            <label for="event-type" class="form-label screen-only"
-                                                aria-label="Filter by Event Type">All Event Categories</label>
+                                            <label for="event-type" class="form-label">All Event Categories</label>
                                             <select id="event-type" class="form-select">
                                                 <option value="">All Event Categories</option>
                                                 <option value="1">Event Type 1</option>
@@ -886,8 +892,7 @@
                                             </select>
                                         </div>
                                         <div class="col-12 col-lg-6">
-                                            <label for="all-event-audiences" class="form-label screen-only"
-                                                aria-label="Filter by Topics">All Event Audiences</label>
+                                            <label for="all-event-audiences" class="form-label"> All Event Audiences</label>
                                             <select id="all-event-audiences" class="form-select">
                                                 <option value="">All Event Audiences</option>
                                                 <option value="1">Event Audience 1</option>
@@ -899,7 +904,7 @@
                                             </select>
                                         </div>
                                         <div class="col-12 col-lg-6">
-                                            <label for="all-departments" class="form-label screen-only"
+                                            <label for="all-departments" class="form-label"
                                                 aria-label="Filter by Topics">All Departments</label>
                                             <select id="all-departments" class="form-select">
                                                 <option value="">All Departments</option>
@@ -912,8 +917,7 @@
                                             </select>
                                         </div>
                                         <div class="col-12 col-lg-6">
-                                            <label for="all-location-types" class="form-label screen-only"
-                                                aria-label="Filter by Topics">All Location Types</label>
+                                            <label for="all-location-types" class="form-label">All Location Types</label>
                                             <select id="all-location-types" class="form-select">
                                                 <option value="">All Location Types</option>
                                                 <option value="1">Topic 1</option>
@@ -1287,18 +1291,219 @@
             return "m/d/Y";
         }
 
-        function initFlatpickrDateInputs() {
-            if (typeof flatpickr !== "function") return;
-            document.querySelectorAll('input[type="date"], input[data-date-format]').forEach((input) => {
-                if (input._flatpickr) return;
-                const formatPattern = input.getAttribute("data-date-format") || "MM/DD/YYYY";
-                flatpickr(input, {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: toFlatpickrFormat(formatPattern),
-                    allowInput: true,
+        function getFlatpickrTrigger(fp) {
+            return fp.altInput || fp.input;
+        }
+
+        function getPickerBaseDate(fp) {
+            return fp.selectedDates[0] || new Date();
+        }
+
+        function navigateFlatpickrDay(fp, offset) {
+            const base = getPickerBaseDate(fp);
+            const next = new Date(base.getFullYear(), base.getMonth(), base.getDate() + offset);
+            fp.setDate(next, false);
+        }
+
+        function makeMonthNavKeyboardAccessible(fp) {
+            const navButtons = [
+                { el: fp.calendarContainer.querySelector(".flatpickr-prev-month"), label: "Previous month", action: () => fp.changeMonth(-1) },
+                { el: fp.calendarContainer.querySelector(".flatpickr-next-month"), label: "Next month", action: () => fp.changeMonth(1) },
+            ];
+
+            navButtons.forEach(({ el, label, action }) => {
+                if (!el || el.dataset.a11yBound) return;
+                el.dataset.a11yBound = "true";
+                el.setAttribute("role", "button");
+                el.setAttribute("tabindex", "0");
+                el.setAttribute("aria-label", label);
+                el.addEventListener("keydown", (event) => {
+                    if (event.key !== "Enter" && event.key !== " ") return;
+                    event.preventDefault();
+                    action();
                 });
             });
+        }
+
+        function enhanceCalendarDialog(fp) {
+            const calendar = fp.calendarContainer;
+            calendar.setAttribute("role", "dialog");
+            calendar.setAttribute("aria-modal", "true");
+            calendar.setAttribute("aria-label", "Choose date");
+            makeMonthNavKeyboardAccessible(fp);
+
+            const monthNav = calendar.querySelector(".flatpickr-months");
+            if (monthNav) {
+                monthNav.setAttribute("role", "group");
+                monthNav.setAttribute("aria-label", "Month navigation");
+            }
+
+            const days = calendar.querySelector(".flatpickr-days");
+            if (days) {
+                days.setAttribute("role", "grid");
+                days.setAttribute("aria-label", "Dates");
+            }
+        }
+
+        function bindFlatpickrKeyboardA11y(fp) {
+            const trigger = getFlatpickrTrigger(fp);
+            const describedBy = trigger.getAttribute("aria-describedby");
+
+            trigger.setAttribute("role", "combobox");
+            trigger.setAttribute("aria-haspopup", "dialog");
+            trigger.setAttribute("aria-expanded", "false");
+            trigger.setAttribute("aria-autocomplete", "none");
+            if (describedBy) trigger.setAttribute("aria-describedby", describedBy);
+
+            if (!fp.calendarContainer.id) {
+                fp.calendarContainer.id = "flatpickr-calendar-" + Math.random().toString(36).slice(2, 9);
+            }
+            trigger.setAttribute("aria-controls", fp.calendarContainer.id);
+
+            trigger.addEventListener("keydown", (event) => {
+                if (!fp.isOpen) {
+                    if (event.key === "ArrowDown" || event.key === "F4" || (event.altKey && event.key === "ArrowDown")) {
+                        event.preventDefault();
+                        fp.open();
+                        trigger.focus();
+                    }
+                    return;
+                }
+
+                switch (event.key) {
+                    case "ArrowLeft":
+                        event.preventDefault();
+                        navigateFlatpickrDay(fp, -1);
+                        break;
+                    case "ArrowRight":
+                        event.preventDefault();
+                        navigateFlatpickrDay(fp, 1);
+                        break;
+                    case "ArrowUp":
+                        event.preventDefault();
+                        navigateFlatpickrDay(fp, -7);
+                        break;
+                    case "ArrowDown":
+                        event.preventDefault();
+                        navigateFlatpickrDay(fp, 7);
+                        break;
+                    case "PageUp":
+                        event.preventDefault();
+                        fp.changeMonth(event.shiftKey ? -12 : -1);
+                        break;
+                    case "PageDown":
+                        event.preventDefault();
+                        fp.changeMonth(event.shiftKey ? 12 : 1);
+                        break;
+                    case "Enter":
+                        event.preventDefault();
+                        if (fp.selectedDates.length) {
+                            fp.setDate(fp.selectedDates[0], true);
+                        }
+                        fp.close();
+                        trigger.focus();
+                        break;
+                    case "Escape":
+                        event.preventDefault();
+                        fp.close();
+                        trigger.focus();
+                        break;
+                    case "Tab":
+                        // Close calendar without stealing focus so the browser
+                        // moves focus naturally to the next (or previous) element
+                        fp._closedByOutsideClick = true;
+                        fp.close();
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+
+        function bindOutsideClickClose(fp) {
+            if (fp.calendarContainer.dataset.outsideClickBound) return;
+            fp.calendarContainer.dataset.outsideClickBound = "true";
+
+            document.addEventListener("mousedown", (event) => {
+                if (!fp.isOpen) return;
+
+                const trigger = getFlatpickrTrigger(fp);
+                const target = event.target;
+
+                if (
+                    fp.calendarContainer.contains(target) ||
+                    trigger === target ||
+                    fp.input === target
+                ) {
+                    return;
+                }
+
+                fp._closedByOutsideClick = true;
+                fp.close();
+            });
+        }
+
+        function initFlatpickrDateInputs() {
+            if (typeof flatpickr !== "function") return;
+
+            document.querySelectorAll('input[data-date-format], input[type="date"]').forEach((input) => {
+                if (input._flatpickr) return;
+
+                const formatPattern = input.getAttribute("data-date-format") || "MM/DD/YYYY";
+                flatpickr(input, {
+                    dateFormat: toFlatpickrFormat(formatPattern),
+                    ariaDateFormat: "F j, Y",
+                    allowInput: true,
+                    disableMobile: true,
+                    clickOpens: true,
+                    onReady: (_selectedDates, _dateStr, instance) => {
+                        enhanceCalendarDialog(instance);
+                        bindFlatpickrKeyboardA11y(instance);
+                        bindOutsideClickClose(instance);
+                    },
+                    onOpen: (_selectedDates, _dateStr, instance) => {
+                        enhanceCalendarDialog(instance);
+                        const trigger = getFlatpickrTrigger(instance);
+                        trigger.setAttribute("aria-expanded", "true");
+                        trigger.focus();
+                    },
+                    onClose: (_selectedDates, _dateStr, instance) => {
+                        const trigger = getFlatpickrTrigger(instance);
+                        trigger.setAttribute("aria-expanded", "false");
+                        if (!instance._closedByOutsideClick) {
+                            trigger.focus();
+                        }
+                        instance._closedByOutsideClick = false;
+                    },
+                    onChange: (_selectedDates, _dateStr, instance) => {
+                        if (!instance.isOpen) {
+                            getFlatpickrTrigger(instance).focus();
+                        }
+                    },
+                    onMonthChange: (_selectedDates, _dateStr, instance) => {
+                        makeMonthNavKeyboardAccessible(instance);
+                    },
+                });
+            });
+
+            document.querySelectorAll(".event-calendar-filter-form").forEach((formSection) => {
+                const form = formSection.closest("form");
+                if (!form || form.dataset.flatpickrResetBound) return;
+                form.dataset.flatpickrResetBound = "true";
+                form.addEventListener("reset", () => {
+                    requestAnimationFrame(() => {
+                        formSection.querySelectorAll("input[data-date-format]").forEach((input) => {
+                            input._flatpickr?.clear();
+                        });
+                    });
+                });
+            });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initFlatpickrDateInputs);
+        } else {
+            initFlatpickrDateInputs();
         }
     </script>
     <!-- custom JS -->

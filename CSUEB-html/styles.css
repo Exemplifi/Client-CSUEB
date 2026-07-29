@@ -97,6 +97,7 @@ h4,
 .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item h3,
 .h4,
 h5,
+.event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title,
 .h5,
 h6,
 .h6 {
@@ -172,7 +173,7 @@ h4, .event-calendar-details-section .event-details-wrapper .event-details-conten
   }
 }
 
-h5, .h5 {
+h5, .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title, .h5 {
   font-family: var(--body-font-family);
   font-size: 1.25rem;
   font-style: normal;
@@ -483,6 +484,8 @@ ul {
 .section-heading .heading-description .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item h3,
 .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item .section-heading .heading-description h3,
 .section-heading .heading-description h5,
+.section-heading .heading-description .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title,
+.event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .section-heading .heading-description .title,
 .section-heading .heading-description h6 {
   margin-top: 1rem !important;
 }
@@ -6437,7 +6440,9 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h2,
 .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h3,
 .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h4,
-.side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h5 {
+.side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h5,
+.side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title,
+.event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description .title {
   margin-bottom: 2.5rem;
 }
 @media (max-width: 767.98px) {
@@ -6445,7 +6450,9 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h2,
   .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h3,
   .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h4,
-  .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h5 {
+  .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description h5,
+  .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title,
+  .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .side-nav-with-content .side-nav-wrap .right-content .section-heading .heading-description .title {
     margin-bottom: 1.5rem;
   }
 }
@@ -6523,6 +6530,8 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
 .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h3,
 .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h4,
 .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h5,
+.side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title,
+.event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content .title,
 .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h6 {
   margin-bottom: 1.5rem;
 }
@@ -6531,6 +6540,8 @@ html[hc=a4] .img-verlap-link-sec .img-verlap-link-card .overlay .news-content .b
   .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h3,
   .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h4,
   .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h5,
+  .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title,
+  .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content .title,
   .side-nav-with-content .side-nav-wrap .right-content .full-img-text-sec .content-section .full-sec-content h6 {
     margin-bottom: 1rem;
   }
@@ -8403,7 +8414,7 @@ body:has(.home-hero-sec) .main-header > .container {
   height: auto;
   aspect-ratio: 16/9;
 }
-.tabbed-section .tab-content .tab-content-box h3, .tabbed-section .tab-content .tab-content-box h4, .tabbed-section .tab-content .tab-content-box .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item h3, .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item .tabbed-section .tab-content .tab-content-box h3, .tabbed-section .tab-content .tab-content-box h5, .tabbed-section .tab-content .tab-content-box h6 {
+.tabbed-section .tab-content .tab-content-box h3, .tabbed-section .tab-content .tab-content-box h4, .tabbed-section .tab-content .tab-content-box .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item h3, .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-item .tabbed-section .tab-content .tab-content-box h3, .tabbed-section .tab-content .tab-content-box h5, .tabbed-section .tab-content .tab-content-box .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title, .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .tabbed-section .tab-content .tab-content-box .title, .tabbed-section .tab-content .tab-content-box h6 {
   margin-top: 1rem !important;
 }
 
@@ -8619,7 +8630,7 @@ table:not(.gssb_c) {
   z-index: 3;
   padding-left: 1rem;
 }
-.lightbox-modal .carousel-item .carousel-caption h5 {
+.lightbox-modal .carousel-item .carousel-caption h5, .lightbox-modal .carousel-item .carousel-caption .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title, .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .lightbox-modal .carousel-item .carousel-caption .title {
   font-size: 2.5rem;
 }
 .lightbox-modal .carousel-item img {
@@ -9957,6 +9968,22 @@ table:not(.gssb_c) {
 }
 .event-calendar-details-section .event-details-wrapper .event-details-content .event-details-more-wrap .event-details-more-btn[aria-expanded=true] .icon-wrap svg {
   transform: rotate(180deg);
+}
+
+/* Flatpickr keyboard focus indicators */
+.flatpickr-calendar .flatpickr-prev-month:focus, .flatpickr-calendar .flatpickr-prev-month:focus-visible,
+.flatpickr-calendar .flatpickr-next-month:focus,
+.flatpickr-calendar .flatpickr-next-month:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.flatpickr-calendar .flatpickr-day:focus, .flatpickr-calendar .flatpickr-day:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+  border-radius: 2px;
+  background: var(--gold);
+  color: var(--black);
 }
 
 .right-content .event-calendar-section {
