@@ -7928,6 +7928,9 @@ body:has(.home-hero-sec) .main-header > .container {
   transform: rotate(45deg);
   color: var(--white);
 }
+.accodian-global .accordion-item .accordion-button:not(.collapsed) .accordion-icon svg path {
+  fill: var(--white);
+}
 .accodian-global .accordion-item .accordion-button:not(.collapsed) .accordion-icon:hover {
   background-color: var(--dark-red);
 }
@@ -8128,7 +8131,7 @@ body:has(.home-hero-sec) .main-header > .container {
   text-decoration: underline;
 }
 
-.faculty-accordion .accordion-body ul li span {
+.faculty-accordion .accordion-body ul li span, .faculty-accordion .accordion-body p span {
   display: inline;
 }
 
@@ -8606,35 +8609,38 @@ table:not(.gssb_c) {
   width: auto;
   margin: 0 auto;
   display: inline-flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
-.lightbox-modal .carousel-item .modal-img-container::after {
-  content: "";
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 63%, rgba(0, 0, 0, 0.5) 88.29% 88.29%);
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-}
 .lightbox-modal .carousel-item .carousel-caption {
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding-bottom: 1rem;
-  background-color: var(--lightbox);
+  position: static;
+  padding: 1rem;
+  background-color: var(--red);
   color: var(--white) !important;
   text-align: center;
   z-index: 3;
-  padding-left: 1rem;
+  width: 100%;
 }
 .lightbox-modal .carousel-item .carousel-caption h5, .lightbox-modal .carousel-item .carousel-caption .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title, .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .lightbox-modal .carousel-item .carousel-caption .title {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
+}
+@media (max-width: 767.98px) {
+  .lightbox-modal .carousel-item .carousel-caption h5, .lightbox-modal .carousel-item .carousel-caption .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .title, .event-calendar-details-section .event-details-wrapper .add-to-calendar-wrap .lightbox-modal .carousel-item .carousel-caption .title {
+    font-size: 1.125rem;
+  }
+}
+.lightbox-modal .carousel-item .carousel-caption p {
+  font-size: 1.125rem;
+}
+@media (max-width: 767.98px) {
+  .lightbox-modal .carousel-item .carousel-caption p {
+    font-size: 0.875rem;
+  }
 }
 .lightbox-modal .carousel-item img {
-  height: 85vh;
+  height: auto;
   object-fit: contain;
 }
 @media (max-width: 767.98px) {

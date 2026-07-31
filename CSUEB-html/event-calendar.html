@@ -1285,6 +1285,8 @@
 
     <!-- Flatpickr (date formatting for MM/DD/YYYY display) -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-timezone@0.5.45/builds/moment-timezone-with-data.min.js"></script>
     <script>
         function toFlatpickrFormat(formatPattern) {
             if (formatPattern === "MM/DD/YYYY") return "m/d/Y";
@@ -1293,6 +1295,53 @@
 
         function getFlatpickrTrigger(fp) {
             return fp.altInput || fp.input;
+        }
+
+        function getFlatpickrForm(fp) {
+            return fp.input?.closest("form") ?? null;
+        }
+
+        function isFlatpickrResetting(fp) {
+            const form = getFlatpickrForm(fp);
+            return Boolean(form?._flatpickrResetting);
+        }
+
+        function closeOtherFlatpickrsInForm(activeFp) {
+            const form = getFlatpickrForm(activeFp);
+            if (!form) return;
+
+            form.querySelectorAll("input[data-date-format]").forEach((input) => {
+                if (input._flatpickr && input._flatpickr !== activeFp && input._flatpickr.isOpen) {
+                    input._flatpickr._closedByOutsideClick = true;
+                    input._flatpickr.close();
+                }
+            });
+        }
+
+        function focusFormSearchField(form, formSection) {
+            const searchField =
+                formSection.querySelector('input[type="search"]') ||
+                form.querySelector('input[type="search"]') ||
+                form.querySelector("#search");
+
+            searchField?.focus();
+        }
+
+        function resetFlatpickrInputsInForm(form, formSection) {
+            form._flatpickrResetting = true;
+
+            formSection.querySelectorAll("input[data-date-format]").forEach((input) => {
+                input._flatpickr?.close();
+            });
+
+            setTimeout(() => {
+                formSection.querySelectorAll("input[data-date-format]").forEach((input) => {
+                    input._flatpickr?.clear(false);
+                });
+
+                form._flatpickrResetting = false;
+                focusFormSearchField(form, formSection);
+            }, 0);
         }
 
         function getPickerBaseDate(fp) {
@@ -1409,8 +1458,6 @@
                         trigger.focus();
                         break;
                     case "Tab":
-                        // Close calendar without stealing focus so the browser
-                        // moves focus naturally to the next (or previous) element
                         fp._closedByOutsideClick = true;
                         fp.close();
                         break;
@@ -1446,12 +1493,14 @@
         function initFlatpickrDateInputs() {
             if (typeof flatpickr !== "function") return;
 
-            document.querySelectorAll('input[data-date-format], input[type="date"]').forEach((input) => {
+            document.querySelectorAll('input[type="date"], input[data-date-format]').forEach((input) => {
                 if (input._flatpickr) return;
 
                 const formatPattern = input.getAttribute("data-date-format") || "MM/DD/YYYY";
                 flatpickr(input, {
-                    dateFormat: toFlatpickrFormat(formatPattern),
+                    dateFormat: "Y-m-d",
+                    altInput: true,
+                    altFormat: toFlatpickrFormat(formatPattern),
                     ariaDateFormat: "F j, Y",
                     allowInput: true,
                     disableMobile: true,
@@ -1462,6 +1511,11 @@
                         bindOutsideClickClose(instance);
                     },
                     onOpen: (_selectedDates, _dateStr, instance) => {
+                        if (isFlatpickrResetting(instance)) {
+                            instance.close();
+                            return;
+                        }
+                        closeOtherFlatpickrsInForm(instance);
                         enhanceCalendarDialog(instance);
                         const trigger = getFlatpickrTrigger(instance);
                         trigger.setAttribute("aria-expanded", "true");
@@ -1470,12 +1524,13 @@
                     onClose: (_selectedDates, _dateStr, instance) => {
                         const trigger = getFlatpickrTrigger(instance);
                         trigger.setAttribute("aria-expanded", "false");
-                        if (!instance._closedByOutsideClick) {
+                        if (!instance._closedByOutsideClick && !isFlatpickrResetting(instance)) {
                             trigger.focus();
                         }
                         instance._closedByOutsideClick = false;
                     },
                     onChange: (_selectedDates, _dateStr, instance) => {
+                        if (isFlatpickrResetting(instance)) return;
                         if (!instance.isOpen) {
                             getFlatpickrTrigger(instance).focus();
                         }
@@ -1490,20 +1545,91 @@
                 const form = formSection.closest("form");
                 if (!form || form.dataset.flatpickrResetBound) return;
                 form.dataset.flatpickrResetBound = "true";
-                form.addEventListener("reset", () => {
-                    requestAnimationFrame(() => {
+
+                const resetBtn = form.querySelector('button[type="reset"]');
+                if (resetBtn && !resetBtn.dataset.flatpickrResetBound) {
+                    resetBtn.dataset.flatpickrResetBound = "true";
+                    resetBtn.addEventListener("mousedown", () => {
+                        form._flatpickrResetting = true;
                         formSection.querySelectorAll("input[data-date-format]").forEach((input) => {
-                            input._flatpickr?.clear();
+                            if (input._flatpickr?.isOpen) {
+                                input._flatpickr._closedByOutsideClick = true;
+                                input._flatpickr.close();
+                            }
                         });
                     });
+                }
+
+                form.addEventListener("reset", () => {
+                    resetFlatpickrInputsInForm(form, formSection);
                 });
             });
         }
 
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", initFlatpickrDateInputs);
-        } else {
+        function getAbbr(date) {
+            let name = new Intl.DateTimeFormat("en-US", { timeZoneName: "short" })
+                .formatToParts(date)
+                .find((part) => part.type === "timeZoneName").value;
+
+            if (name.includes("+") || name.includes("-") || name.includes("GMT")) {
+                const offset = date.getTimezoneOffset();
+                switch (offset) {
+                    case -330: return "IST";
+                    case 420: return "PDT";
+                    case 480: return "PST";
+                    case 240: return "EDT";
+                    case 300: return "EST";
+                    default: return name;
+                }
+            }
+            return name;
+        }
+
+        function initLocalDateTime() {
+            if (typeof moment === "undefined" || typeof moment.tz !== "function") return;
+
+            document.querySelectorAll(".local-date").forEach((el) => {
+                const start = moment.tz(el.dataset.start, "America/Los_Angeles").toDate();
+                const end = moment.tz(el.dataset.end, "America/Los_Angeles").toDate();
+
+                if (isNaN(start)) return;
+
+                const startStr = moment(start).format("MMMM D, YYYY");
+                const endStr = moment(end).format("MMMM D, YYYY");
+
+                if (start.toDateString() === end.toDateString()) {
+                    el.innerText = startStr;
+                } else {
+                    el.innerText = `${startStr} - ${endStr}`;
+                }
+            });
+
+            document.querySelectorAll(".local-time").forEach((el) => {
+                const start = moment.tz(el.dataset.start, "America/Los_Angeles").toDate();
+                const end = moment.tz(el.dataset.end, "America/Los_Angeles").toDate();
+
+                if (isNaN(start)) return;
+
+                let timeDisplay = moment(start).format("hh:mm A");
+
+                if (el.dataset.end && el.dataset.end.indexOf("T01:00:00") === -1) {
+                    timeDisplay += " - " + moment(end).format("hh:mm A");
+                }
+
+                const tz = getAbbr(start);
+                el.innerText = `${timeDisplay} (${tz})`;
+            });
+        }
+
+        function initEventCalendarScripts() {
             initFlatpickrDateInputs();
+            initLocalDateTime();
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initEventCalendarScripts);
+        } else {
+            initEventCalendarScripts();
         }
     </script>
     <!-- custom JS -->
