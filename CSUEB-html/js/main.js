@@ -842,8 +842,18 @@ function initGalleryLightbox() {
   let currentIframes = [];
   let youtubePlayers = [];
 
-  function createCaption(caption) {
-    return caption ? `<div class="carousel-caption d-none d-md-block"><h5 class="m-0">${caption}</h5></div>` : '';
+  function createCaption(rel, title) {
+    if (!rel && !title) return '';
+
+    const parts = [];
+    if (title) {
+      parts.push(`<h5 class="m-0">${title}</h5>`);
+      if (rel && rel !== title) parts.push(`<p class="m-0 mt-1">${rel}</p>`);
+    } else if (rel) {
+      parts.push(`<h5 class="m-0">${rel}</h5>`);
+    }
+
+    return `<div class="carousel-caption">${parts.join('')}</div>`;
   }
 
   function createIndicators(links, activeIndex) {
@@ -860,7 +870,8 @@ function initGalleryLightbox() {
       const img = link.querySelector('img');
       const imgAlt = img ? img.getAttribute('alt') || "" : "";
       const isActive = i === activeIndex ? " active" : "";
-      const title = link.getAttribute('rel');
+      const rel = link.getAttribute('rel') || "";
+      const title = link.getAttribute('title') || "";
 
       if (videoUrl) {
         const autoplayParam = i === activeIndex ? "&autoplay=1" : "";
@@ -878,7 +889,7 @@ function initGalleryLightbox() {
           <div class="carousel-item${isActive}">
             <div class="modal-img-container">
               <img class="d-block img-fluid w-100" src="${imgSrc}" alt="${imgAlt}">
-              ${createCaption(title)}
+              ${createCaption(rel, title)}
             </div>
           </div>
         `;

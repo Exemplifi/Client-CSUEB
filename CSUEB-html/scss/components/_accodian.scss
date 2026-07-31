@@ -92,6 +92,9 @@
             transition: transform 0.3s ease;
             transform: rotate(45deg);
             color: var(--white);
+            path{
+              fill: var(--white);
+            }
           }
 
           &:hover {
@@ -339,6 +342,6 @@
   }
 }
 
-.faculty-accordion .accordion-body ul li span {
+.faculty-accordion .accordion-body ul li span, .faculty-accordion .accordion-body p span {
   display: inline;
 }
