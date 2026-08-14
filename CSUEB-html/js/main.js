@@ -440,27 +440,162 @@ function initGallerySlider() {
 }
 
 function initInnerHeroSlider() {
-  new Swiper(".hero-full-swiper", {
+  const heroEl = document.querySelector(".hero-full-swiper");
+  if (!heroEl) return;
+
+  const playPauseBtn = heroEl.querySelector(".hero-autoplay-control");
+  const wrapper = heroEl.querySelector(".swiper-wrapper");
+  const slideCount = heroEl.querySelectorAll(".swiper-slide").length;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hasAutoplayClass = heroEl.classList.contains("autoplay-slider") || Boolean(heroEl.closest(".autoplay-slider"));
+  const enableAutoplay = hasAutoplayClass && Boolean(playPauseBtn) && slideCount > 1;
+
+  if (playPauseBtn) {
+    playPauseBtn.hidden = !enableAutoplay;
+  }
+
+  const heroSwiper = new Swiper(heroEl, {
     slidesPerView: 1,
     spaceBetween: 10,
     loop: false,
-    pagination: { el: ".hero-full-swiper .swiper-pagination", clickable: true },
+    rewind: true,
+    autoplay: enableAutoplay
+      ? { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: false }
+      : false,
+    pagination: { el: heroEl.querySelector(".swiper-pagination"), clickable: true },
     navigation: {
-      nextEl: ".hero-full-swiper .swiper-button-next.swiper-btn",
-      prevEl: ".hero-full-swiper .swiper-button-prev.swiper-btn",
+      nextEl: heroEl.querySelector(".swiper-button-next.swiper-btn"),
+      prevEl: heroEl.querySelector(".swiper-button-prev.swiper-btn"),
+    },
+    a11y: {
+      prevSlideMessage: "Previous slide",
+      nextSlideMessage: "Next slide",
+      slideLabelMessage: "",
+      slideRole: "",
+      scrollOnFocus: false,
     },
     on: {
       init: function () {
-        // Hide navigation if only one slide
+        updateHeroSlideA11y(this);
         if (this.slides.length <= 1) {
-          const nextBtn = document.querySelector('.hero-full-swiper .swiper-button-next.swiper-btn');
-          const prevBtn = document.querySelector('.hero-full-swiper .swiper-button-prev.swiper-btn');
-          if (nextBtn) nextBtn.classList.add('d-none');
-          if (prevBtn) prevBtn.classList.add('d-none');
+          const nextBtn = heroEl.querySelector(".swiper-button-next.swiper-btn");
+          const prevBtn = heroEl.querySelector(".swiper-button-prev.swiper-btn");
+          if (nextBtn) nextBtn.classList.add("d-none");
+          if (prevBtn) prevBtn.classList.add("d-none");
+          if (playPauseBtn) playPauseBtn.classList.add("d-none");
         }
-      }
-    }
+      },
+      slideChange: function () {
+        updateHeroSlideA11y(this);
+      },
+    },
   });
+
+  function updateHeroSlideA11y(swiper) {
+    swiper.slides.forEach(function (slide, index) {
+      const isActive = index === swiper.activeIndex;
+      if (isActive) {
+        slide.removeAttribute("aria-hidden");
+        slide.removeAttribute("inert");
+        if (slide.tagName === "A") slide.removeAttribute("tabindex");
+      } else {
+        slide.setAttribute("aria-hidden", "true");
+        slide.setAttribute("inert", "");
+        if (slide.tagName === "A") slide.setAttribute("tabindex", "-1");
+      }
+      slide.removeAttribute("role");
+      slide.removeAttribute("aria-roledescription");
+      slide.removeAttribute("aria-label");
+    });
+
+    if (wrapper) {
+      wrapper.setAttribute("aria-live", "off");
+      wrapper.removeAttribute("aria-atomic");
+    }
+  }
+
+  if (!enableAutoplay) return;
+
+  const statusEl = heroEl.querySelector("#hero-slide-status");
+  let isPlaying = !prefersReducedMotion;
+  let userForcedPlay = false;
+  let hasFocus = false;
+
+  function shouldRotate() {
+    return isPlaying && (userForcedPlay || !hasFocus);
+  }
+
+  function setStatusLive(announce) {
+    if (!statusEl) return;
+    statusEl.setAttribute("aria-live", announce ? "polite" : "off");
+    if (!announce) statusEl.textContent = "";
+  }
+
+  function announceSlide(swiper) {
+    if (!statusEl || shouldRotate()) return;
+    statusEl.textContent = "Slide " + (swiper.activeIndex + 1) + " of " + swiper.slides.length;
+  }
+
+  function syncAutoplay() {
+    if (!heroSwiper.autoplay) return;
+    if (shouldRotate()) {
+      if (!heroSwiper.autoplay.running) {
+        heroSwiper.autoplay.start();
+      } else if (heroSwiper.autoplay.paused) {
+        heroSwiper.autoplay.resume();
+      }
+      setStatusLive(false);
+    } else if (isPlaying) {
+      if (heroSwiper.autoplay.running && !heroSwiper.autoplay.paused) {
+        heroSwiper.autoplay.pause();
+      }
+      setStatusLive(true);
+    } else {
+      heroSwiper.autoplay.stop();
+      setStatusLive(true);
+    }
+  }
+
+  function setPlaying(playing, fromUser) {
+    isPlaying = playing;
+    if (fromUser) {
+      userForcedPlay = playing;
+    }
+    playPauseBtn.classList.toggle("pause", playing);
+    playPauseBtn.classList.toggle("play", !playing);
+    playPauseBtn.setAttribute(
+      "aria-label",
+      playing ? "Stop automatic slide show" : "Start automatic slide show"
+    );
+    if (wrapper) {
+      wrapper.setAttribute("aria-live", "off");
+      wrapper.removeAttribute("aria-atomic");
+    }
+    syncAutoplay();
+  }
+
+  playPauseBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    setPlaying(!isPlaying, true);
+  });
+
+  heroEl.addEventListener("focusin", function () {
+    hasFocus = true;
+    syncAutoplay();
+  });
+
+  heroEl.addEventListener("focusout", function (event) {
+    if (heroEl.contains(event.relatedTarget)) return;
+    hasFocus = false;
+    syncAutoplay();
+  });
+
+  heroSwiper.on("slideChangeTransitionEnd", function () {
+    announceSlide(this);
+  });
+
+  setPlaying(isPlaying, false);
 }
 
 function initTextIconSlider() {
@@ -1273,6 +1408,9 @@ function initAccessibilityFeatures() {
   // Enhanced ARIA live regions
   const liveRegions = document.querySelectorAll('[aria-live]');
   liveRegions.forEach(region => {
+    if (region.classList.contains('swiper-wrapper') || region.id === 'hero-carousel-slides') {
+      return;
+    }
     if (!region.getAttribute('aria-atomic')) {
       region.setAttribute('aria-atomic', 'true');
     }

@@ -482,6 +482,53 @@
     margin-left: auto;
     margin-right: 0;
 
+    .autoplay-slider:has(.swiper-slide:nth-child(2)) &:has(.hero-autoplay-control) {
+      min-width: rem.convert(280px);
+    }
+
+    .hero-autoplay-control {
+      display: none !important;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 11;
+      pointer-events: auto;
+      border: none;
+      appearance: none;
+
+      .autoplay-slider:has(.swiper-slide:nth-child(2)) & {
+        display: flex !important;
+      }
+
+      &[hidden],
+      &.d-none {
+        display: none !important;
+      }
+
+      svg {
+        width: rem.convert(12px);
+        height: rem.convert(14px);
+      }
+
+      .icon-play {
+        display: none;
+      }
+
+      .icon-pause {
+        display: block;
+      }
+
+      &.play .icon-play {
+        display: block;
+      }
+
+      &.play .icon-pause {
+        display: none;
+      }
+    }
+
     .swiper-btn {
       background-color: #FFFFFF40;
       transition: all 0.3s ease-in-out;
