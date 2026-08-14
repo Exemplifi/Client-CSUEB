@@ -425,7 +425,7 @@
     }
 
     .pagination-container {
-      z-index: unset;
+      z-index: 10;
 
       @media (min-width: 1920px) {
         max-width: rem.convert(1920px) !important;

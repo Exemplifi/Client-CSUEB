@@ -493,11 +493,13 @@
 
 
     <!--  Hero Section Start -->
-    <section class="inner-hero-section inner-hero-full-slider bg-black">
+    <section class="inner-hero-section inner-hero-full-slider autoplay-slider bg-black" aria-roledescription="carousel"
+      aria-label="Featured highlights">
       <!-- Swiper -->
       <div class="swiper inner-hero-slider hero-full-swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide bg-transparent">
+        <div id="hero-slide-status" class="visually-hidden" aria-live="off" aria-atomic="true"></div>
+        <div class="swiper-wrapper" id="hero-carousel-slides" aria-live="off">
+          <a href="#" class="swiper-slide bg-transparent">
 
             <div class="img-wrapper w-100">
               <img src="./images/inner-hero-primary.png" alt="Hero" class="img-fluid w-100 h-100 object-fit-cover">
@@ -511,13 +513,12 @@
                 <div class="slider-heading text-center text-md-start ">
                   <h1 class="mb-0">Sample Landing Page Sample Landing </h1>
                   <p class="text-large">This site shows the various content types in our template.</p>
-                  <button type="submit" class="btn btn-search-submit">
                 </div>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="swiper-slide bg-transparent">
+          <a href="#" class="swiper-slide bg-transparent">
             <div class="img-wrapper w-100">
               <img src="./images/inner-hero-primary.png" alt="Hero" class="img-fluid w-100 h-100 object-fit-cover">
               <!-- 
@@ -533,9 +534,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="swiper-slide bg-transparent">
+          <a href="#" class="swiper-slide bg-transparent">
             <div class="img-wrapper w-100">
               <img src="./images/inner-hero-primary.png" alt="Hero"
                 class="img-fluid w-100 h-100 object-fit-cover d-none d-md-block">
@@ -552,9 +553,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="swiper-slide bg-transparent">
+          <a href="#" class="swiper-slide bg-transparent">
             <div class="img-wrapper w-100">
               <img src="./images/inner-hero-primary.png" alt="Hero"
                 class="img-fluid w-100 h-100 object-fit-cover d-none d-md-block">
@@ -571,33 +572,42 @@
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
-
 
         <div class="container pagination-container d-flex align-items-center">
           <div class="button-with-pagination-sec relative d-flex gap-3">
-            <div class="swiper-button-prev swiper-button-prev-new swiper-btn">
+            <button type="button" class="hero-autoplay-control swiper-btn pause"
+              aria-label="Stop automatic slide show" aria-controls="hero-carousel-slides">
+              <svg class="icon-pause" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+                <path d="M0 0h4v14H0V0zm8 0h4v14H8V0z" fill="black" />
+              </svg>
+              <svg class="icon-play" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+                <path d="M0 0v14l12-7L0 0z" fill="black" />
+              </svg>
+            </button>
+
+            <button type="button" class="swiper-button-prev swiper-button-prev-new swiper-btn"
+              aria-label="Previous slide" aria-controls="hero-carousel-slides">
               <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
                 <path
                   d="M6.99976 0.929688L0.929443 7L6.99976 13.0703L8.49976 11.5703L3.92944 7L8.49976 2.42969L6.99976 0.929688Z"
                   fill="black" />
               </svg>
-            </div>
+            </button>
 
             <div class="swiper-pagination"></div>
 
-
-            <div class="swiper-button-next swiper-button-next-new swiper-btn">
-
+            <button type="button" class="swiper-button-next swiper-button-next-new swiper-btn"
+              aria-label="Next slide" aria-controls="hero-carousel-slides">
               <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
                 <path
                   d="M1.99976 0.929688L0.499756 2.42969L5.07007 7L0.499756 11.5703L1.99976 13.0703L8.07007 7L1.99976 0.929688Z"
                   fill="black" />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
 
@@ -605,6 +615,8 @@
       <!-- Swiper End -->
     </section>
     <!--  Hero Section End -->
+
+
     <section class="section parallax text-center bg-img ">
       <div class="section-bg-overlay"
         style="background: url(https://csueastbay.edu/_files/images/landing/wysiwyg-background.jpg);"
@@ -699,8 +711,7 @@
                   fill="black"></path>
               </svg>
             </div>
-            <div
-              class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock"
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock"
               ><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
                 role="button" aria-label="Go to slide 1" aria-current="true"></span></div>
             <div class="swiper-button-next swiper-button-next-new swiper-btn" tabindex="-1" role="button"
